@@ -1,0 +1,1 @@
+docker build --force-rm --no-cache -t centos7:latest -f dockerfile.centos7 .

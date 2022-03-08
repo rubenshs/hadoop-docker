@@ -1,0 +1,10 @@
+FROM base:latest
+
+WORKDIR /usr/local/hadoop/etc/hadoop/
+
+COPY files\*.xml *.xml
+COPY files\workers $HADOOP_HOME/etc/hadoop/workers
+
+RUN yum install nginx -y
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
