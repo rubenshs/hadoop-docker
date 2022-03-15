@@ -1,1 +1,0 @@
-docker build --force-rm --no-cache -t hadoop-namenode:latest -f dockerfile.hadoop .

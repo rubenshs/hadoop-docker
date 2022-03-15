@@ -1,0 +1,52 @@
+version: "3.9"
+networks:
+  mynetwork:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+services:
+  namenode:
+    image: localhost:5000/hadoop-namenode:latest
+    hostname: hdps
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.100
+    container_name: hdps
+    restart: always
+    ports:
+      - 9870:9870
+      - 9000:9000
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+
+  datanode1:
+    image: localhost:5000/hadoop-namenode:latest
+    hostname: hdpslv1
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.210    
+    container_name: hdpslv1
+    restart: always    
+    volumes:
+      - hadoop_datanode1:/hadoop/dfs/data
+    environment:        
+      SERVICE_PRECONDITION: "namenode:9870"    
+
+  datanode2:
+    image: localhost:5000/hadoop-namenode:latest
+    hostname: hdpslv2
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.220        
+    container_name: hdpslv2
+    restart: always
+    volumes:
+      - hadoop_datanode2:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+  
+volumes:
+  hadoop_namenode:
+  hadoop_datanode1:
+  hadoop_datanode2:
