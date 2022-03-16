@@ -7,7 +7,7 @@ USER root
 
 ENV USER=hadoop
 ENV PASSWORD=1
-ENV JAVA_HOME=/usr/java/jdk-8u181-linux-x64/
+ENV JAVA_HOME=/usr/java/jdk1.8.0_181/
 ENV JRE_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
 ENV RELEASE="3.1.0"
 ENV HADOOP_HOME=/usr/local/hadoop
@@ -22,14 +22,14 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 ENV PATH=$HADOOP_HOME/bin:$PATH
 ENV PATH=$JRE_HOME/bin:$PATH
 
+ENV HADOOP_CONF_DIR=/etc/hadoop/conf
+ENV HADOOP_COMMON_HOME=$HADOOP_HOME
+ENV HADOOP_MAPRED_HOME=$HADOOP_HOME
+ENV HADOOP_HDFS_HOME=$HADOOP_HOME/share/hadoop/hdfs
+ENV HADOOP_YARN_HOME=$HADOOP_HOME/share/hadoop/yarn
+
+
+
 RUN useradd $USER
 RUN echo $PASSWORD | passwd $USER --stdin
-WORKDIR /home/$USER
-
-WORKDIR /usr/java/
-RUN wget http://datascienceacademy.com.br/blog/aluno/JDK/jdk-8u181-linux-x64.tar.gz
-RUN tar -xvf jdk-8u181-linux-x64.tar.gz
-
-WORKDIR $HADOOP_HOME
-RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-$RELEASE/hadoop-$RELEASE.tar.gz
-RUN tar -xvf hadoop-$RELEASE.tar.gz
+WORKDIR $HADOOP_HOME\sbin

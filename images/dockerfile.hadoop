@@ -1,22 +1,9 @@
 FROM localhost:5000/hadoop-namenode_base:latest
 
-
-### funciona , mas é melhor usar o copy
-#WORKDIR $HADOOP_HOME/etc/hadoop/
-#ADD . /files/*.xml
-
-### funciona , mas é melhor usar o copy
-#WORKDIR $HADOOP_HOME/etc/hadoop/
-#ADD . /files\workers
-
-### funciona , mas é melhor usar o copy
-#WORKDIR $HADOOP_HOME/etc/hadoop/
-#ADD . /files\hadoop-env.sh
-
 COPY \/files/*.xml $HADOOP_HOME/etc/hadoop/*.xml
 COPY \/files\workers $HADOOP_HOME/etc/hadoop/workers
 COPY \/files\hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+COPY \/files\log4j.properties $HADOOP_CONF_DIR/log4j.properties
 
-##RUN yum install nginx -y
-##EXPOSE 80
-##CMD ["nginx", "-g", "daemon off;"]
+#RUN bash 
+#RUN su hadoop
