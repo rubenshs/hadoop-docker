@@ -1,5 +1,4 @@
 #!/bin/bash
 
-./build-centos7.sh
-./build_hadoop_base.sh
+./build-centos.sh
 ./build_hadoop.sh

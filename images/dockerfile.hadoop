@@ -1,9 +1,18 @@
-FROM localhost:5000/hadoop-namenode_base:latest
+FROM localhost:5000/base-centos7:latest
+
+USER root
+
+RUN useradd $USER
+RUN echo $PASSWORD | passwd $USER --stdin
+WORKDIR $HADOOP_HOME\sbin
 
 COPY \/files/*.xml $HADOOP_HOME/etc/hadoop/*.xml
 COPY \/files\workers $HADOOP_HOME/etc/hadoop/workers
 COPY \/files\hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadoop-env.sh
 COPY \/files\log4j.properties $HADOOP_CONF_DIR/log4j.properties
+
+RUN chown -R hadoop $HADOOP_HOME
+
 
 #RUN bash 
 #RUN su hadoop

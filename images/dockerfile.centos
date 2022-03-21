@@ -11,5 +11,15 @@ RUN wget http://datascienceacademy.com.br/blog/aluno/JDK/jdk-8u181-linux-x64.tar
 RUN tar -xvf jdk-8u181-linux-x64.tar.gz
 
 WORKDIR /usr/local/hadoop
-RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-$RELEASE/hadoop-$RELEASE.tar.gz
-RUN tar -xvf hadoop-$RELEASE.tar.gz
+RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-3.1.0/hadoop-3.1.0.tar.gz
+RUN tar -xvf hadoop-3.1.0.tar.gz
+
+RUN useradd hadoop
+RUN echo 1 | passwd hadoop --stdin
+
+RUN mkdir -p /home/hadoop
+COPY \/files/.bashrc /home/hadoop/.bashrc
+RUN source ~/.bashrc
+RUN echo "${HADOOP_HOME}"
+
+USER hadoop
