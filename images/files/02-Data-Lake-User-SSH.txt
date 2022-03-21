@@ -1,0 +1,48 @@
+# Instalação Data Lake
+
+# Criando usuários e configurando o SSH
+
+# Criando usuários (nos 3 servidores do cluster)
+
+useradd -m hadoop
+passwd hadoop
+
+
+# Configurando o SSH (nos 3 servidores do cluster)
+vi /etc/ssh/sshd_config
+
+
+# Certifique-se que estas configurações estejam ativas:
+
+Port 22
+#AddressFamily any
+ListenAddress 0.0.0.0
+ListenAddress ::
+PubkeyAuthentication yes
+
+
+# Restart do SSH
+
+systemctl restart sshd.service
+
+
+# Cria a chave de segurança SSH (apenas no node master)
+
+su hadoop
+cd ~
+ssh-keygen
+
+
+# Copia a chave
+
+ssh-copy-id -i ~/.ssh/hdp-key.pub hadoop@hdpslv1
+ssh-copy-id -i ~/.ssh/hdp-key.pub hadoop@hdpslv2
+ssh-copy-id -i ~/.ssh/hdp-key.pub hadoop@hdpmaster
+
+
+# Testa a conexão
+
+# Do master para o slave
+ssh hadoop@hdpslv1 -i ~/.ssh/hdp-key
+
+

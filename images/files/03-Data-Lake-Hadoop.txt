@@ -1,0 +1,39 @@
+# Instalação Data Lake
+
+# Instalando e Configurando o Hadoop
+
+# Acessa o diretório
+cd /opt
+
+# Faz download do Hadoop
+wget http://www-us.apache.org/dist/hadoop/common/hadoop-3.1.0/hadoop-3.1.0.tar.gz
+
+# Descompacta o arquivo
+tar -xvf hadoop-3.1.0.tar.gz
+
+# Muda o proprietário
+chown -R hadoop /opt/hadoop
+
+
+# Testando a instalação
+
+su hadoop
+cd /opt/hadoop/bin
+./hadoop version
+
+
+# Variáveis de ambiente do usuário Hadoop (configurar em todos os servidores)
+
+vi .bash_profile
+
+# Java JDK 1.8
+export JAVA_HOME=/opt/jdk
+export JRE_HOME=/opt/jdk/jre
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+
+# Hadoop
+export HADOOP_HOME=/opt/hadoop
+export PATH=$PATH:$HADOOP_HOME/bin
+
+source .bash_profile
+

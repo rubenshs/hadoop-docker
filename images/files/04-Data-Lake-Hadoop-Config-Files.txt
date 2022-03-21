@@ -1,0 +1,154 @@
+# Instalação Data Lake
+
+# Instalando e Configurando o Hadoop no NameNode
+
+# Editar o arquivo $HADOOP_HOME/etc/hadoop/hadoop-env.sh e adicionar as linhas:
+
+export HADOOP_CONF_DIR="${HADOOP_HOME}/etc/hadoop"
+export PATH="${PATH}:${HADOOP_HOME}/bin"
+export HADOOP_SSH_OPTS="-i ~/.ssh/hdp-key"
+
+
+# Editar o arquivo $HADOOP_HOME/etc/hadoop/core-site.xml e adicionar as linhas:
+
+<configuration>
+   <property>
+     <name>fs.default.name</name>
+     <value>hdfs://hdpmaster:19000</value>
+   </property>
+</configuration>
+
+
+# Cria os diretórios abaixo
+
+mkdir /opt/hadoop/dfs
+mkdir /opt/hadoop/dfs/data
+mkdir /opt/hadoop/dfs/namespace_logs
+
+
+# Editar o arquivo $HADOOP_HOME/etc/hadoop/hdfs-site.xml e adicionar as linhas:
+
+<configuration>
+    <property>
+      <name>dfs.replication</name>
+      <value>3</value>
+    </property>
+    <property>
+      <name>dfs.namenode.name.dir</name>
+      <value>/opt/hadoop/dfs/namespace_logs</value>
+    </property>
+    <property>
+      <name>dfs.datanode.data.dir</name>
+      <value>/opt/hadoop/dfs/data</value>
+    </property>
+</configuration>
+
+
+# Editar o arquivo $HADOOP_HOME/etc/hadoop/workers e adicionar as linhas:
+
+hdpslv1
+hdpslv2
+
+
+# Editar o arquivo $HADOOP_HOME/etc/hadoop/mapred-site.xml e adicionar as linhas:
+
+<configuration>
+    <property>
+       <name>mapreduce.job.user.name</name>
+       <value>hadoop</value>
+    </property>
+   
+   <property>
+      <name>yarn.resourcemanager.address</name>
+      <value>hdpmaster:8032</value>
+   </property>
+
+   <property> 
+	    <name>mapreduce.framework.name</name> 
+	    <value>yarn</value> 
+   </property>
+
+   <property>
+     <name>yarn.app.mapreduce.am.env</name>
+     <value>HADOOP_MAPRED_HOME=/opt/hadoop</value>
+   </property>
+
+   <property>
+     <name>mapreduce.map.env</name>
+     <value>HADOOP_MAPRED_HOME=/opt/hadoop</value>
+   </property>
+
+   <property>
+     <name>mapreduce.reduce.env</name>
+     <value>HADOOP_MAPRED_HOME=/opt/hadoop</value>
+   </property>
+
+</configuration>
+
+
+
+# Editar o arquivo $HADOOP_HOME/etc/hadoop/yarn-site.xml e adicionar as linhas:
+
+<configuration>
+
+  <property>
+     <name>yarn.resourcemanager.hostname</name>
+     <value>hdpmaster</value>
+  </property>
+
+  <property>
+     <name>yarn.nodemanager.resource.memory-mb</name>
+     <value>1536</value>
+  </property>
+
+  <property>
+     <name>yarn.scheduler.maximum-allocation-mb</name>
+     <value>1536</value>
+  </property>
+
+  <property>
+     <name>yarn.scheduler.minimum-allocation-mb</name>
+     <value>128</value>
+  </property>
+
+  <property>
+     <name>yarn.nodemanager.vmem-check-enabled</name>
+     <value>false</value>
+  </property>
+
+  <property>
+     <name>yarn.server.resourcemanager.application.expiry.interval</name>
+     <value>60000</value>
+   </property>
+
+  <property>
+     <name>yarn.nodemanager.aux-services</name>
+     <value>mapreduce_shuffle</value>
+   </property>
+
+  <property>
+     <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+     <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+   </property>
+
+  <property>
+     <name>yarn.log-aggregation-enable</name>
+     <value>true</value>
+   </property>
+
+  <property>
+     <name>yarn.log-aggregation.retain-seconds</name>
+     <value>-1</value>
+   </property>
+
+  <property>
+     <name>yarn.application.classpath</name>
+   <value>$HADOOP_CONF_DIR,${HADOOP_COMMON_HOME}/share/hadoop/common/*,${HADOOP_COMMON_HOME}/share/hadoop/common/lib/*,${HADOOP_HDFS_HOME}/share/hadoop/hdfs/*,${HADOOP_HDFS_HOME}/share/hadoop/hdfs/lib/*,${HADOOP_MAPRED_HOME}/share/hadoop/mapreduce/*,${HADOOP_MAPRED_HOME}/share/hadoop/mapreduce/lib/*,${HADOOP_YARN_HOME}/share/hadoop/yarn/*,${HADOOP_YARN_HOME}/share/hadoop/yarn/lib/*</value>
+   </property>
+   
+</configuration>
+
+
+
+
+
