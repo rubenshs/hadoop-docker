@@ -1,25 +1,79 @@
 FROM centos:7
 
-LABEL maintainer="Rubens Suzuqui +> rubens545.s@gmail.com"
+LABEL org.opencontainers.image.authors="rubens545.s@gmail.com,loesterclanfranco@gmail.com"
+LABEL "com.example.vendor"="hadoop"
+LABEL com.example.label-with-value="hadoop"
+LABEL version="1.0"
+LABEL description="hadoop"
 
-RUN yum update -y
-RUN yum upgrade -y
-RUN yum install epel-release wget tar gzip -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
+
+ENV USER=hadoop
+ENV PASSWORD=1
+ENV HOME=/home/hadoop
+ENV JAVA_HOME=/usr/java/jdk1.8.0_181/
+ENV JRE_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
+ENV RELEASE="3.1.0"
+ENV HADOOP_HOME=/usr/local/hadoop
+ENV HADOOP_HDFS_HOME=/usr/local/hadoop
+ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
+ENV YARN_HOME=/usr/local/hadoop
+ENV HADOOP_COMMON_HOME=/usr/local/hadoop
+ENV HADOOP_COMMON_LIB_NATIVE_DIR=/usr/local/hadoop/lib/native
+ENV HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
+ENV HADOOP_SSH_OPTS="-i ~/.ssh/hdp-key"
+ENV HADOOP_CONF_DIR=/etc/hadoop/conf
+ENV HADOOP_COMMON_HOME=/usr/local/hadoop
+ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
+ENV HADOOP_HDFS_HOME=/usr/local/hadoop/share/hadoop/hdfs
+ENV HADOOP_YARN_HOME=/usr/local/hadoop/share/hadoop/yarn
+ENV PATH=$JAVA_HOME/bin:$PATH
+ENV PATH=$HADOOP_HOME/bin:$PATH
+ENV PATH=$JRE_HOME/bin:$PATH
+
+
+RUN mkdir -p /home/hadoop /usr/local/hadoop
+RUN chmod -R 777 /home/hadoop /usr/local/hadoop
+
+RUN useradd hadoop -m -d /home/hadoop 
+RUN usermod -aG wheel hadoop
+#RUN echo "hadoop  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/hadoop
+
+RUN chown -R hadoop /usr/local/hadoop
+
+#RUN echo "root:1" | chpasswd
+RUN echo "hadoop:1" | chpasswd
+RUN lid -g wheel
+
+RUN yum update -y -q
+RUN yum upgrade -y -q
+RUN yum install -y -q epel-release wget tar gzip java-1.8.0-openjdk java-1.8.0-openjdk-devel openssh-server net-tools openssh-clients vim htop
+
+WORKDIR /home/hadoop
+COPY \/files/.bashrc /home/hadoop/.bashrc
 
 WORKDIR /usr/java/
-RUN wget http://datascienceacademy.com.br/blog/aluno/JDK/jdk-8u181-linux-x64.tar.gz
-RUN tar -xvf jdk-8u181-linux-x64.tar.gz
+RUN wget -q http://datascienceacademy.com.br/blog/aluno/JDK/jdk-8u181-linux-x64.tar.gz
+RUN tar -xf jdk-8u181-linux-x64.tar.gz
+RUN rm jdk-8u181-linux-x64.tar.gz
 
 WORKDIR /usr/local/hadoop
-RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-3.1.0/hadoop-3.1.0.tar.gz
-RUN tar -xvf hadoop-3.1.0.tar.gz
+RUN wget -q https://archive.apache.org/dist/hadoop/core/hadoop-3.1.0/hadoop-3.1.0.tar.gz
+RUN tar -xf hadoop-3.1.0.tar.gz
+RUN rm hadoop-3.1.0.tar.gz
 
-RUN useradd hadoop
-RUN echo 1 | passwd hadoop --stdin
+RUN mv -f -i -n /usr/local/hadoop/hadoop-3.1.0/* /usr/local/hadoop
 
-RUN mkdir -p /home/hadoop
-COPY \/files/.bashrc /home/hadoop/.bashrc
-RUN source ~/.bashrc
-RUN echo "${HADOOP_HOME}"
+RUN ssh-keygen -A
 
-USER hadoop
+RUN systemctl enable sshd
+
+EXPOSE 22
+EXPOSE 9870 
+EXPOSE 9000
+
+#USER hadoop
+
+WORKDIR /home/hadoop
+#RUN source /home/hadoop/.bashrc
+
+CMD ["/usr/sbin/sshd", "-D"]

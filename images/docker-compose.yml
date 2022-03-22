@@ -1,13 +1,14 @@
-version: "3.9"
+version: '3.9'
 networks:
   mynetwork:
     ipam:
       config:
         - subnet: 172.20.0.0/24
-
 services:
   namenode:
-    image: localhost:5000/hadoop-namenode:latest
+    env_file:
+      - .env
+    image: 'localhost:5000/hadoop:latest'
     hostname: hdps
     networks:
       mynetwork:
@@ -15,38 +16,44 @@ services:
     container_name: hdps
     restart: always
     ports:
-      - 9870:9870
-      - 9000:9000
+      - '9870:9870'
+      - '9000:9000'
+      - '2201:22'
     volumes:
-      - hadoop_namenode:/hadoop/dfs/name
-
+      - 'hadoop_namenode:/hadoop/dfs/name'
   datanode1:
-    image: localhost:5000/hadoop-namenode:latest
+    env_file:
+      - .env  
+    image: 'localhost:5000/hadoop:latest'
     hostname: hdpslv1
     networks:
       mynetwork:
-        ipv4_address: 172.20.0.210    
+        ipv4_address: 172.20.0.210
     container_name: hdpslv1
-    restart: always    
+    restart: always
+    ports:
+      - '2202:22'
     volumes:
-      - hadoop_datanode1:/hadoop/dfs/data
-    environment:        
-      SERVICE_PRECONDITION: "namenode:9870"    
-
+      - 'hadoop_datanode1:/hadoop/dfs/data'
+    environment:
+      SERVICE_PRECONDITION: 'namenode:9870'
   datanode2:
-    image: localhost:5000/hadoop-namenode:latest
+    env_file:
+      - .env  
+    image: 'localhost:5000/hadoop:latest'
     hostname: hdpslv2
     networks:
       mynetwork:
-        ipv4_address: 172.20.0.220        
+        ipv4_address: 172.20.0.220
     container_name: hdpslv2
     restart: always
+    ports:
+      - '2203:22'
     volumes:
-      - hadoop_datanode2:/hadoop/dfs/data
+      - 'hadoop_datanode2:/hadoop/dfs/data'
     environment:
-      SERVICE_PRECONDITION: "namenode:9870"
-  
+      SERVICE_PRECONDITION: 'namenode:9870'
 volumes:
-  hadoop_namenode:
-  hadoop_datanode1:
-  hadoop_datanode2:
+  hadoop_namenode: null
+  hadoop_datanode1: null
+  hadoop_datanode2: null

@@ -18,7 +18,7 @@ chown -R hadoop /opt/hadoop
 # Testando a instalação
 
 su hadoop
-cd /opt/hadoop/bin
+cd /opt/hadoop/sbin
 ./hadoop version
 
 
