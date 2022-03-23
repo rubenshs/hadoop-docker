@@ -34,11 +34,6 @@ ENV YARN_RESOURCEMANAGER_USER=root
 ENV YARN_NODEMANAGER_USER=root
 ENV SBIN=/usr/local/hadoop/sbin
 
-# depois que regerar o centos base apagar aqui
-RUN useradd hadoop -m -d /home/hadoop 
-RUN usermod -aG wheel hadoop
-# depois que regerar o centos base apagar aqui
-
 RUN echo "root:1" | chpasswd
 RUN echo "hadoop:1" | chpasswd
 

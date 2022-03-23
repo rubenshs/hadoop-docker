@@ -4,8 +4,8 @@ RUN yum update -y -q
 RUN yum upgrade -y -q
 RUN yum install -y -q epel-release wget tar gzip java-1.8.0-openjdk java-1.8.0-openjdk-devel openssh-server net-tools openssh-clients vim htop
 
-RUN mkdir -p /home/hadoop /usr/local/hadoop
-RUN chmod -R 777 /home/hadoop /usr/local/hadoop
+RUN mkdir -p /usr/local/hadoop
+RUN chmod -R 777 /usr/local/hadoop
 
 WORKDIR /usr/java/
 RUN wget -q http://datascienceacademy.com.br/blog/aluno/JDK/jdk-8u181-linux-x64.tar.gz
@@ -22,4 +22,4 @@ RUN rm -R /usr/local/hadoop/hadoop-3.1.0
 
 RUN useradd hadoop -m -d /home/hadoop 
 RUN usermod -aG wheel hadoop
-RUN chown -R hadoop /usr/local/hadoop
+RUN chown -R hadoop /usr/local/hadoop /home/hadoop
