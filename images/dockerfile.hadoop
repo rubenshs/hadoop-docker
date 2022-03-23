@@ -11,7 +11,7 @@ ENV PASSWORD=1
 ENV HOME=/home/hadoop
 ENV JAVA_HOME=/usr/java/jdk1.8.0_181/
 ENV JRE_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
-ENV RELEASE="3.1.0"
+ENV RELEASE=3.1.0
 ENV HADOOP_HOME=/usr/local/hadoop
 ENV HADOOP_HDFS_HOME=/usr/local/hadoop
 ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
@@ -20,35 +20,37 @@ ENV HADOOP_COMMON_HOME=/usr/local/hadoop
 ENV HADOOP_COMMON_LIB_NATIVE_DIR=/usr/local/hadoop/lib/native
 ENV HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 ENV HADOOP_SSH_OPTS="-i ~/.ssh/hdp-key"
-ENV HADOOP_CONF_DIR=/etc/hadoop/conf
-ENV HADOOP_COMMON_HOME=/usr/local/hadoop
 ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
-ENV HADOOP_HDFS_HOME=/usr/local/hadoop/share/hadoop/hdfs
-ENV HADOOP_YARN_HOME=/usr/local/hadoop/share/hadoop/yarn
+ENV HADOOP_HDFS_HOME=/usr/local/hadoop
+ENV HADOOP_YARN_HOME=/usr/local/hadoop
 ENV PATH=$JAVA_HOME/bin:$PATH
 ENV PATH=$HADOOP_HOME/bin:$PATH
+ENV PATH=$HADOOP_COMMON_HOME/bin:$HADOOP_HDFS_HOME/bin:$HADOOP_MAPRED_HOME/bin:$PATH
 ENV PATH=$JRE_HOME/bin:$PATH
+ENV HDFS_NAMENODE_USER=root
+ENV HDFS_DATANODE_USER=root
+ENV HDFS_SECONDARYNAMENODE_USER=root
+ENV YARN_RESOURCEMANAGER_USER=root
+ENV YARN_NODEMANAGER_USER=root
+ENV SBIN=/usr/local/hadoop/sbin
 
-RUN mkdir -p /home/hadoop /usr/local/hadoop
-RUN chmod -R 777 /home/hadoop /usr/local/hadoop
-
+# depois que regerar o centos base apagar aqui
 RUN useradd hadoop -m -d /home/hadoop 
 RUN usermod -aG wheel hadoop
-
-RUN chown -R hadoop /usr/local/hadoop
+# depois que regerar o centos base apagar aqui
 
 RUN echo "root:1" | chpasswd
 RUN echo "hadoop:1" | chpasswd
 
-COPY \/files/*.xml /usr/local/hadoop/etc/hadoop/*.xml
-COPY \/files/workers /usr/local/hadoop/etc/hadoop/workers
-COPY \/files/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh
-COPY \/files/log4j.properties /usr/local/hadoop/etc/hadoop/log4j.properties
-COPY \/files/.bashrc /home/hadoop/.bashrc
+COPY files/*.xml /usr/local/hadoop/etc/hadoop/
+COPY files/workers /usr/local/hadoop/etc/hadoop/workers
+COPY files/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh
+COPY files/log4j.properties /usr/local/hadoop/etc/hadoop/log4j.properties
+COPY files/.bashrc /home/hadoop/.bashrc
 
 RUN ssh-keygen -A
 
-USER hadoop
+#USER hadoop
 WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
 

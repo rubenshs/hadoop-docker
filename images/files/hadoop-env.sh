@@ -1,58 +1,28 @@
-#
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Set Hadoop-specific environment variables here.
-
-export HADOOP_CONF_DIR="${HADOOP_HOME}/etc/hadoop"
-export PATH="${PATH}:${HADOOP_HOME}/bin"
+#!/bin/bash
+export USER=hadoop
+export PASSWORD=1
+export HOME=/home/hadoop
+export JAVA_HOME=/usr/java/jdk1.8.0_181/
+export JRE_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
+export RELEASE=3.1.0
+export HADOOP_HOME=/usr/local/hadoop
+export HADOOP_HDFS_HOME=/usr/local/hadoop
+export HADOOP_MAPRED_HOME=/usr/local/hadoop
+export YARN_HOME=/usr/local/hadoop
+export HADOOP_COMMON_HOME=/usr/local/hadoop
+export HADOOP_COMMON_LIB_NATIVE_DIR=/usr/local/hadoop/lib/native
+export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 export HADOOP_SSH_OPTS="-i ~/.ssh/hdp-key"
-
-##
-## THIS FILE ACTS AS THE MASTER FILE FOR ALL HADOOP PROJECTS.
-## SETTINGS HERE WILL BE READ BY ALL HADOOP COMMANDS.  THEREFORE,
-## ONE CAN USE THIS FILE TO SET YARN, HDFS, AND MAPREDUCE
-## CONFIGURATION OPTIONS INSTEAD OF xxx-env.sh.
-##
-## Precedence rules:
-##
-## {yarn-env.sh|hdfs-env.sh} > hadoop-env.sh > hard-coded defaults
-##
-## {YARN_xyz|HDFS_xyz} > HADOOP_xyz > hard-coded defaults
-##
-
-# Many of the options here are built from the perspective that users
-# may want to provide OVERWRITING values on the command line.
-# For example:
-#
-#  JAVA_HOME=/usr/java/testing hdfs dfs -ls
-#
-# Therefore, the vast majority (BUT NOT ALL!) of these defaults
-# are configured for substitution and not append.  If append
-# is preferable, modify this file accordingly.
-
-###
-# Generic settings for HADOOP
-###
-
-# Technically, the only required environment variable is JAVA_HOME.
-# All others are optional.  However, the defaults are probably not
-# preferred.  Many sites configure these options outside of Hadoop,
-# such as in /etc/profile.d
-
-# The java implementation to use. By default, this environment
-# variable is REQUIRED on ALL platforms except OS X!
-export JAVA_HOME=/opt/jdk
+export HADOOP_MAPRED_HOME=/usr/local/hadoop
+export HADOOP_HDFS_HOME=/usr/local/hadoop
+export HADOOP_YARN_HOME=/usr/local/hadoop
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$HADOOP_HOME/bin:$PATH
+export PATH=$HADOOP_COMMON_HOME/bin:$HADOOP_HDFS_HOME/bin:$HADOOP_MAPRED_HOME/bin:$PATH
+export PATH=$JRE_HOME/bin:$PATH
+export HDFS_NAMENODE_USER=root
+export HDFS_DATANODE_USER=root
+export HDFS_SECONDARYNAMENODE_USER=root
+export YARN_RESOURCEMANAGER_USER=root
+export YARN_NODEMANAGER_USER=root
+export SBIN=/usr/local/hadoop/sbin

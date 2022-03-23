@@ -1,7 +1,12 @@
 # hadoop-docker
-
+```
 docker-compose up
+```
 
+# conectar via ssh
+```
+ssh root@172.20.0.100
+``` 
 
 # verificar ip no Linux CentOs 7
 ```
