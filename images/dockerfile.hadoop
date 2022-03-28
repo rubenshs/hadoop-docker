@@ -6,34 +6,6 @@ LABEL com.example.label-with-value="hadoop"
 LABEL version="1.0"
 LABEL description="hadoop"
 
-ENV USER=hadoop
-ENV PASSWORD=1
-ENV HOME=/home/hadoop
-ENV JAVA_HOME=/usr/java/jdk1.8.0_181/
-ENV JRE_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
-ENV RELEASE=3.1.0
-ENV HADOOP_HOME=/usr/local/hadoop
-ENV HADOOP_HDFS_HOME=/usr/local/hadoop
-ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
-ENV YARN_HOME=/usr/local/hadoop
-ENV HADOOP_COMMON_HOME=/usr/local/hadoop
-ENV HADOOP_COMMON_LIB_NATIVE_DIR=/usr/local/hadoop/lib/native
-ENV HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
-ENV HADOOP_SSH_OPTS="-i ~/.ssh/hdp-key"
-ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
-ENV HADOOP_HDFS_HOME=/usr/local/hadoop
-ENV HADOOP_YARN_HOME=/usr/local/hadoop
-ENV PATH=$JAVA_HOME/bin:$PATH
-ENV PATH=$HADOOP_HOME/bin:$PATH
-ENV PATH=$HADOOP_COMMON_HOME/bin:$HADOOP_HDFS_HOME/bin:$HADOOP_MAPRED_HOME/bin:$PATH
-ENV PATH=$JRE_HOME/bin:$PATH
-ENV HDFS_NAMENODE_USER=hadoop
-ENV HDFS_DATANODE_USER=hadoop
-ENV HDFS_SECONDARYNAMENODE_USER=hadoop
-ENV YARN_RESOURCEMANAGER_USER=hadoop
-ENV YARN_NODEMANAGER_USER=hadoop
-ENV SBIN=/usr/local/hadoop/sbin
-
 RUN echo "root:1" | chpasswd
 RUN echo "hadoop:1" | chpasswd
 
@@ -44,6 +16,14 @@ COPY files/log4j.properties /usr/local/hadoop/etc/hadoop/log4j.properties
 COPY files/.bashrc /home/hadoop/.bashrc
 
 RUN ssh-keygen -A
+
+RUN mkdir -p /usr/local/hadoop/logs
+RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs
+RUN chown -R hadoop /etc/ssh/sshd_config /etc/ssh/ /usr/local/hadoop/logs
+
+RUN cat /etc/ssh/ssh_host_rsa_key.pub >> ~/.ssh/authorized_keys
+
+
 
 USER hadoop
 WORKDIR /home/hadoop
