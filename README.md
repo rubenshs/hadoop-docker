@@ -5,7 +5,7 @@ docker-compose up
 
 # conectar via ssh
 ```
-ssh root@172.20.0.100
+ssh hadoop@172.20.0.100
 ``` 
 
 # verificar ip no Linux CentOs 7
@@ -28,8 +28,14 @@ sudo vim /home/loester/.ssh/known_hosts
 # conectar via SSH por usuário
 ```
 ssh hadoop@172.20.0.100 -p 2201
+source /home/hadoop/.bashrc
+
 ssh hadoop@172.20.0.210 -p 2202
+source /home/hadoop/.bashrc
+
 ssh hadoop@172.20.0.220 -p 2203
+source /home/hadoop/.bashrc
+
 
 ssh hadoop@hdps -p 2201
 ssh hadoop@hdpslv1 -p 2202
