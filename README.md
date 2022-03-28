@@ -19,6 +19,12 @@ $ sudo vim /etc/ssh/sshd_config
 $ service sshd restart
 ```
 
+# A cada BUILD e "docker-compose up" , sempre limpar esse arquivo
+```
+sudo gedit /home/loester/.ssh/known_hosts
+sudo vim /home/loester/.ssh/known_hosts
+```
+
 # conectar via SSH por usuário
 ```
 ssh hadoop@172.20.0.100 -p 2201
