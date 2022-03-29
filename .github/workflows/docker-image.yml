@@ -6,26 +6,21 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: "rubenss"
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: "hadoop"
-  
 jobs:
 
-  build-images:
+  build:
+
     runs-on: ubuntu-latest
 
-steps:
+    steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image BASE
       run: docker build -t localhost:5000/base-centos7:latest -f images/dockerfile.centos .
     - name: Build the Docker image HADOOP
       run: docker build -t localhost:5000/hadoop:latest -f images/dockerfile.hadoop .
-    - name: docker login
-      run: docker login -u ${{ env.REGISTRY }}
-    - name: docker push base
-      run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
-    - name: docker push hadoop
-      run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+    - name: Docker Login
+      run: docker login -u rubenss
+    - name: Docker Push Base
+      run: docker push rubenss/hadoop:base
+    - name: Docker Push Hadoop
+      run: docker push rubenss/hadoop:latest
