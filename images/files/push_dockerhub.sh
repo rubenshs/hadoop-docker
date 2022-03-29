@@ -1,10 +1,12 @@
 #!/bin/bash
 
-docker tag localhost:5000/hadoop:latest loester87/hadoop:latest
-docker tag localhost:5000/base-centos7:latest loester87/hadoop:base
+export USUARIO=rubenss
 
-docker login -u=loester87
+docker tag localhost:5000/hadoop:latest ${USUARIO}/hadoop:latest
+docker tag localhost:5000/base-centos7:latest ${USUARIO}/hadoop:base
 
-docker push loester87/hadoop:base
-docker push loester87/hadoop:latest
+docker login -u=${USUARIO}
+
+docker push ${USUARIO}/hadoop:base
+docker push ${USUARIO}/hadoop:latest
 
