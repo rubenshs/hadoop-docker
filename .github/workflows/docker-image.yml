@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build the Docker image BASE
+      run: docker build -t localhost:5000/base-centos7:latest -f images/dockerfile.centos .
+    - name: Build the Docker image HADOOP
+      run: docker build -t localhost:5000/hadoop:latest -f images/dockerfile.hadoop .
