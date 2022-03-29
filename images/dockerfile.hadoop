@@ -1,4 +1,4 @@
-FROM localhost:5000/base-centos7:latest
+FROM rubenss/hadoop:base
 
 LABEL org.opencontainers.image.authors="rubens545.s@gmail.com,loesterclanfranco@gmail.com"
 LABEL "com.example.vendor"="hadoop"
