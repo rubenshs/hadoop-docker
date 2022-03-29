@@ -1,5 +1,6 @@
 # hadoop-docker
 ```
+wget https://raw.githubusercontent.com/rubenshs/hadoop-docker/main/images/docker-compose.yml
 docker-compose up
 ```
 
