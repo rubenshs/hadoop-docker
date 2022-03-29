@@ -19,7 +19,7 @@ jobs:
     - name: Build the Docker image HADOOP
       run: docker build -t localhost:5000/hadoop:latest -f images/dockerfile.hadoop .
     - name: Docker Login
-      run: docker login -u rubenss
+      run: docker login -u rubenss -p ${{ secrets.DOCKERHUB }}
     - name: Docker Push Base
       run: docker push rubenss/hadoop:base
     - name: Docker Push Hadoop
