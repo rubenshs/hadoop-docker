@@ -8,7 +8,7 @@ services:
   namenode:
 #    env_file:
 #      - .env
-    image: 'docker pull rubenss/hadoop:latest'
+    image: 'rubenss/hadoop:latest'
     hostname: hdps
     networks:
       mynetwork:
@@ -24,7 +24,7 @@ services:
   datanode1:
 #    env_file:
 #      - .env  
-    image: 'docker pull rubenss/hadoop:latest'
+    image: 'rubenss/hadoop:latest'
     hostname: hdpslv1
     networks:
       mynetwork:
@@ -40,7 +40,7 @@ services:
   datanode2:
 #    env_file:
 #      - .env  
-    image: 'docker pull rubenss/hadoop:latest'
+    image: 'rubenss/hadoop:latest'
     hostname: hdpslv2
     networks:
       mynetwork:
