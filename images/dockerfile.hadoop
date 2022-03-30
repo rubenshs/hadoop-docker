@@ -17,8 +17,8 @@ COPY images/files/.bashrc /home/hadoop/.bashrc
 
 RUN ssh-keygen -A
 
-RUN mkdir -p /usr/local/hadoop/logs /home/hadoop
-RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop
+RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh/authorized_keys
+RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh/authorized_keys
 RUN chown -R hadoop /etc/ssh/sshd_config /etc/ssh/ /usr/local/hadoop/logs
 
 RUN cat > /home/hadoop/.ssh/authorized_keys
