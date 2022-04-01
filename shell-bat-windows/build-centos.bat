@@ -1,0 +1,1 @@
+docker build -t base-centos7:latest -f images/dockerfile.centos .

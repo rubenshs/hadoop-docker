@@ -6,8 +6,6 @@ networks:
         - subnet: 172.20.0.0/24
 services:
   namenode:
-#    env_file:
-#      - .env
     image: 'rubenss/hadoop:latest'
     hostname: hdpmaster
     networks:
@@ -22,8 +20,6 @@ services:
     volumes:
       - 'hadoop_namenode:/hadoop/dfs/name'
   datanode1:
-#    env_file:
-#      - .env  
     image: 'rubenss/hadoop:latest'
     hostname: hdpslv1
     networks:
@@ -38,8 +34,6 @@ services:
     environment:
       SERVICE_PRECONDITION: 'namenode:9870'
   datanode2:
-#    env_file:
-#      - .env  
     image: 'rubenss/hadoop:latest'
     hostname: hdpslv2
     networks:
