@@ -9,11 +9,11 @@ services:
 #    env_file:
 #      - .env
     image: 'rubenss/hadoop:latest'
-    hostname: hdps
+    hostname: hdpmaster
     networks:
       mynetwork:
         ipv4_address: 172.20.0.100
-    container_name: hdps
+    container_name: hdpmaster
     restart: always
     ports:
       - '9870:9870'
