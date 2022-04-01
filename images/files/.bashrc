@@ -1,3 +1,4 @@
+export PDSH_RCMD_TYPE=ssh
 export USER=hadoop
 export PASSWORD=1
 export HOME=/home/hadoop
@@ -18,6 +19,4 @@ export HDFS_DATANODE_USER=hadoop
 export HDFS_SECONDARYNAMENODE_USER=hadoop
 export YARN_RESOURCEMANAGER_USER=hadoop
 export YARN_NODEMANAGER_USER=hadoop
-export PATH=$JAVA_HOME/bin:$PATH
-export PATH=$HADOOP_HOME/bin:$PATH
-export PATH=$JRE_HOME/bin:$PATH
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH

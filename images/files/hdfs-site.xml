@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-
 <configuration>
-    <property>
-      <name>dfs.replication</name>
-      <value>3</value>
-    </property>
-    <property>
-      <name>dfs.namenode.name.dir</name>
-      <value>/usr/local/hadoop/dfs/namespace_logs</value>
-    </property>
-    <property>
-      <name>dfs.datanode.data.dir</name>
-      <value>/usr/local/hadoop/dfs/data</value>
-    </property>
-</configuration>
+  <property>
+  <name>dfs.namenode.name.dir</name><value>/usr/local/hadoop/data/nameNode</value>
+  </property>
+  <property>
+  <name>dfs.datanode.data.dir</name><value>/usr/local/hadoop/data/dataNode</value>
+  </property>
+  <property>
+  <name>dfs.replication</name>
+  <value>3</value>
+  </property>
+  </configuration>

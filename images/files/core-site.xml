@@ -4,6 +4,6 @@
 <configuration>
    <property>
      <name>fs.default.name</name>
-     <value>hdfs://hdpmaster:19000</value>
+     <value>hdfs://hdpmaster:9000</value>
    </property>
 </configuration>
