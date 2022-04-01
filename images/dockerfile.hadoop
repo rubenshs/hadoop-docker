@@ -7,7 +7,7 @@ LABEL version="1.0"
 LABEL description="hadoop"
 
 RUN echo "root:1" | chpasswd
-RUN echo "hadoop:1" | chpasswd
+RUN echo "hadoop:" | chpasswd
 
 COPY images/files/*.xml /usr/local/hadoop/etc/hadoop/
 COPY images/files/workers /usr/local/hadoop/etc/hadoop/workers
