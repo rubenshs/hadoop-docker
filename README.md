@@ -1,8 +1,8 @@
 # how to use
 ```
-docker pull rubenss/hadoop:latest; /
-wget https://raw.githubusercontent.com/rubenshs/hadoop-docker/main/images/docker-compose.yml; /
-docker-compose up;
+docker pull rubenss/hadoop:latest /
+wget https://raw.githubusercontent.com/rubenshs/hadoop-docker/main/images/docker-compose.yml /
+docker-compose up
 ```
 
 ---
