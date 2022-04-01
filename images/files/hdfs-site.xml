@@ -23,10 +23,10 @@
     </property>
     <property>
       <name>dfs.namenode.name.dir</name>
-      <value>/opt/hadoop/dfs/namespace_logs</value>
+      <value>/usr/local/hadoopdfs/namespace_logs</value>
     </property>
     <property>
       <name>dfs.datanode.data.dir</name>
-      <value>/opt/hadoop/dfs/data</value>
+      <value>/usr/local/hadoopdfs/data</value>
     </property>
 </configuration>

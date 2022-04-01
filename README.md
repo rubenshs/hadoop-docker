@@ -38,9 +38,9 @@ ssh hadoop@172.20.0.220 -p 2203
 source /home/hadoop/.bashrc
 
 
-ssh hadoop@hdps -p 2201
-ssh hadoop@hdpslv1 -p 2202
-ssh hadoop@hdpslv2 -p 2203
+ssh hadoop@hdpmaster -p 2201
+ssh hadoop@hdpmasterlv1 -p 2202
+ssh hadoop@hdpmasterlv2 -p 2203
 ```
 
 # conectar via SSH por certificado
@@ -49,9 +49,9 @@ ssh hadoop@172.20.0.100 -p 2201 -i ~/.ssh/hdp-key
 ssh hadoop@172.20.0.210 -p 2202 -i ~/.ssh/hdp-key
 ssh hadoop@172.20.0.220 -p 2203 -i ~/.ssh/hdp-key
 
-ssh hadoop@hdps -p 2201 -i ~/.ssh/hdp-key
-ssh hadoop@hdpslv1 -p 2202  -i ~/.ssh/hdp-key
-ssh hadoop@hdpslv2 -p 2203  -i ~/.ssh/hdp-key
+ssh hadoop@hdpmaster -p 2201 -i ~/.ssh/hdp-key
+ssh hadoop@hdpmasterlv1 -p 2202  -i ~/.ssh/hdp-key
+ssh hadoop@hdpmasterlv2 -p 2203  -i ~/.ssh/hdp-key
 ```
 
 # iniciar os serviços manualmente

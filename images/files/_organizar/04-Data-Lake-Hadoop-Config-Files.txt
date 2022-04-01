@@ -21,9 +21,9 @@ export HADOOP_SSH_OPTS="-i ~/.ssh/hdp-key"
 
 # Cria os diretórios abaixo
 
-mkdir /opt/hadoop/dfs
-mkdir /opt/hadoop/dfs/data
-mkdir /opt/hadoop/dfs/namespace_logs
+mkdir ${HADOOP_HOME}dfs
+mkdir ${HADOOP_HOME}dfs/data
+mkdir ${HADOOP_HOME}dfs/namespace_logs
 
 
 # Editar o arquivo $HADOOP_HOME/etc/hadoop/hdfs-site.xml e adicionar as linhas:
@@ -35,11 +35,11 @@ mkdir /opt/hadoop/dfs/namespace_logs
     </property>
     <property>
       <name>dfs.namenode.name.dir</name>
-      <value>/opt/hadoop/dfs/namespace_logs</value>
+      <value>${HADOOP_HOME}dfs/namespace_logs</value>
     </property>
     <property>
       <name>dfs.datanode.data.dir</name>
-      <value>/opt/hadoop/dfs/data</value>
+      <value>${HADOOP_HOME}dfs/data</value>
     </property>
 </configuration>
 
