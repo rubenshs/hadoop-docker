@@ -4,7 +4,7 @@
 
 # Como root, executar o comando abaixo em cada Slave:
 
-mkdir /opt/hadoop
+mkdir /usr/local/hadoop
 cd /opt
 chown -R hadoop:hadoop hadoop/
 
@@ -13,5 +13,5 @@ chown -R hadoop:hadoop hadoop/
 
 su - hadoop
 cd ~
-scp -rv -i "~/.ssh/hdp-key" /opt/hadoop  hadoop@hdpslv1:/opt
-scp -rv -i "~/.ssh/hdp-key" /opt/hadoop  hadoop@hdpslv2:/opt
+scp -rv -i "~/.ssh/hdp-key" /usr/local/hadoop  hadoop@hdpslv1:/opt
+scp -rv -i "~/.ssh/hdp-key" /usr/local/hadoop  hadoop@hdpslv2:/opt
