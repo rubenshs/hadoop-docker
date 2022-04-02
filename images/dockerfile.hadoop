@@ -26,8 +26,9 @@ WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
 
 #RUN ssh-keygen -A
-WORKDIR /home/hadoop
-RUN ssh-keygen -t rsa -b 4096 -C "172.20.0.100" -f /home/hadoop/.ssh/id_rsa
+WORKDIR /home/hadoop -f /home/hadoop/.ssh/id_rsa
+RUN ls -lah /home/hadoop/.ssh/
+
 RUN chown hadoop /home/hadoop/.ssh/id_rsa
 RUN chown hadoop /home/hadoop/.ssh/id_rsa.pub
 
