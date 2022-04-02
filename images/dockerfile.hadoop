@@ -20,25 +20,17 @@ RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chown -R hadoop /home/hadoop /etc/ssh/sshd_config /etc/ssh /usr/local/hadoop/logs /home/hadoop/.ssh
 
-#RUN chown hadoop /home/hadoop/.ssh/ssh_host_rsa_key
-#RUN chown hadoop /home/hadoop/.ssh/id_rsa.pub
-
-#RUN cat /home/hadoop/.ssh/ssh_host_rsa_key >> /home/hadoop/.ssh/authorized_keys
-#RUN cp /home/hadoop/.ssh/ssh_host_rsa_key /home/hadoop/.ssh/hdp-key
-
-#RUN chmod +x /home/hadoop/.ssh/known_hosts
-#RUN chown hadoop /home/hadoop/.ssh/known_hosts
-#RUN chmod 0600 /home/hadoop/.ssh/authorized_keys
-
-#RUN echo "" >> /home/hadoop/.ssh/known_hosts
-#RUN chown -v hadoop /home/hadoop/.ssh/known_hosts
-#RUN rm /home/hadoop/.ssh/known_hosts
-
 USER hadoop
 WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
 
-RUN ssh-keygen -A -f /home/hadoop/.ssh
+RUN ssh-keygen -A
+
+RUN cat /home/hadoop/.ssh/ssh_host_rsa_key >> /etc/ssh/authorized_keys
+RUN chmod 0600 /etc/ssh/authorized_keys
+RUN cp /etc/ssh/ssh_host_rsa_key /etc/ssh/.ssh/hdp-key
+RUN chown -R hadoop /etc/ssh 
+RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 
 RUN echo -e "\nPasswordAuthentication no" >> /etc/ssh/ssh_config
 RUN echo -e "\nChallengeResponseAuthentication no" >> /etc/ssh/ssh_config
