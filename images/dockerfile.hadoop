@@ -21,7 +21,6 @@ RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chown -R hadoop /home/hadoop /etc/ssh/sshd_config /etc/ssh /usr/local/hadoop/logs
 
-RUN cat /etc/ssh/ssh_host_rsa_key.pub >> /root/.ssh/known_hosts
 RUN cat /etc/ssh/ssh_host_rsa_key.pub >> /home/hadoop/.ssh/authorized_keys
 
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
@@ -47,6 +46,8 @@ RUN echo -e "\nHost *\n    User                   hadoop\n    StrictHostKeyCheck
 RUN echo -e "\nHost localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
 
 # TESTE , APAGANDO known_hosts
+RUN echo "\n" >> /root/.ssh/known_hosts
+RUN echo "\n" >> /home/hadoop/.ssh/known_hosts
 RUN rm /root/.ssh/known_hosts /home/hadoop/.ssh/known_hosts
 
 EXPOSE 22
