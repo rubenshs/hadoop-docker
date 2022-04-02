@@ -26,7 +26,7 @@ RUN source /home/hadoop/.bashrc
 
 RUN ssh-keygen -A
 
-RUN cat /home/hadoop/.ssh/ssh_host_rsa_key >> /etc/ssh/authorized_keys
+RUN cat /etc/ssh/ssh_host_rsa_key >> /etc/ssh/authorized_keys
 RUN chmod 0600 /etc/ssh/authorized_keys
 RUN cp /etc/ssh/ssh_host_rsa_key /etc/ssh/.ssh/hdp-key
 RUN chown -R hadoop /etc/ssh 
