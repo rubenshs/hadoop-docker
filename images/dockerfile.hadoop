@@ -49,13 +49,13 @@ RUN chmod 700 /home/hadoop/.ssh/
 RUN chmod 600 /home/hadoop/.ssh/*
 RUN chown -R hadoop /home/hadoop/.ssh/
 RUN chgrp -R hadoop /home/hadoop/.ssh/
-sudo chown -v hadoop /home/hadoop/.ssh/known_hosts
+RUN chown -v hadoop /home/hadoop/.ssh/known_hosts
 
 RUN chmod 700 /etc/ssh/
 RUN chmod 600 /etc/ssh/*
 RUN chown -R hadoop /etc/ssh/
 RUN chgrp -R hadoop /etc/ssh/
-sudo chown -v hadoop /etc/ssh/known_hosts
+RUN chown -v hadoop /etc/ssh/known_hosts
 
 # TESTE , APAGANDO known_hosts
 RUN echo "\n" >> /root/.ssh/known_hosts
