@@ -28,6 +28,8 @@ USER hadoop
 WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
 
+RUN echo -e "\nPasswordAuthentication no\n" >> /etc/ssh/ssh_config
+
 EXPOSE 22
 EXPOSE 9870 
 EXPOSE 9000
