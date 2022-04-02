@@ -22,5 +22,7 @@ jobs:
       run: docker build -t rubenss/hadoop:latest -f images/dockerfile.hadoop .
     - name: Docker Login
       run: docker login -u rubenss -p ${{ secrets.DOCKERHUB }}
-    - name: Docker Push all tags
-      run: docker push --all-tags rubenss/hadoop
+#    - name: Docker Push all tags
+#      run: docker push --all-tags rubenss/hadoop
+    - name: Docker Push latest
+      run: docker push rubenss/hadoop:latest
