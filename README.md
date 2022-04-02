@@ -18,7 +18,7 @@ docker cp hdpmaster:/home/hadoop/.ssh /home/loester/teste
 ```
 ### executa o ssh pelo certificado
 ```
-docker ssh hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
+ssh hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
 ```
 ---
 # connect via SSH by password
