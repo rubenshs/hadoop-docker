@@ -46,6 +46,9 @@ RUN echo -e "\nHost *\n   StrictHostKeyChecking=no\n   UserKnownHostsFile=/dev/n
 RUN echo -e "\nHost *\n    User                   hadoop\n    StrictHostKeyChecking  no\n    IdentityFile          /home/hadoop/.ssh/hdp-key\n" >> /etc/ssh/ssh_config    
 RUN echo -e "\nHost localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
 
+# TESTE , APAGANDO known_hosts
+RUN rm /root/.ssh/known_hosts /home/hadoop/.ssh/known_hosts
+
 EXPOSE 22
 EXPOSE 9870 
 EXPOSE 9000
