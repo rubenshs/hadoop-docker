@@ -38,7 +38,7 @@ USER hadoop
 WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
 
-RUN ssh-keygen -t rsa -C "test@test.com" -f /home/hadoop/.ssh/id_rsa
+RUN ssh-keygen -A -f /home/hadoop/.ssh
 
 RUN echo -e "\nPasswordAuthentication no" >> /etc/ssh/ssh_config
 RUN echo -e "\nChallengeResponseAuthentication no" >> /etc/ssh/ssh_config
