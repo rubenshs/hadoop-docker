@@ -18,7 +18,7 @@ COPY images/files/.bashrc /home/hadoop/.bashrc
 
 RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
-RUN chown -R hadoop /home/hadoop /etc/ssh/sshd_config /etc/ssh /usr/local/hadoop/logs
+RUN chown -R hadoop /home/hadoop /etc/ssh/sshd_config /etc/ssh /usr/local/hadoop/logs /home/hadoop/.ssh
 
 #RUN chown hadoop /home/hadoop/.ssh/ssh_host_rsa_key
 #RUN chown hadoop /home/hadoop/.ssh/id_rsa.pub
@@ -38,7 +38,7 @@ USER hadoop
 WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
 
-RUN ssh-keygen -A -f /home/hadoop/.ssh/
+RUN ssh-keygen -t rsa -C "test@test.com" -f /home/hadoop/.ssh/id_rsa
 
 RUN echo -e "\nPasswordAuthentication no" >> /etc/ssh/ssh_config
 RUN echo -e "\nChallengeResponseAuthentication no" >> /etc/ssh/ssh_config
