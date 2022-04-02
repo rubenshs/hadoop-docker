@@ -15,32 +15,33 @@ COPY images/files/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh
 COPY images/files/log4j.properties /usr/local/hadoop/etc/hadoop/log4j.properties
 COPY images/files/.bashrc /home/hadoop/.bashrc
 
-#RUN ssh-keygen -A
-WORKDIR /home/hadoop
-RUN ssh-keygen -t rsa -b 4096 -C "172.20.0.100"
-
-RUN chmod +x /home/hadoop/.ssh/known_hosts
-
-RUN chown hadoop /home/hadoop/.ssh/id_rsa
-RUN chown hadoop /home/hadoop/.ssh/id_rsa.pub
-RUN chown hadoop /home/hadoop/.ssh/known_hosts
 
 RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chown -R hadoop /home/hadoop /etc/ssh/sshd_config /etc/ssh /usr/local/hadoop/logs
 
-RUN cat /etc/ssh/ssh_host_rsa_key.pub >> /home/hadoop/.ssh/authorized_keys
-
-RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
-RUN cp /etc/ssh/ssh_host_rsa_key /home/hadoop/.ssh/hdp-key
-
-RUN chown -R hadoop:hadoop /home/hadoop/.ssh
-RUN chmod -R 700 /home/hadoop/.ssh 
-RUN chmod 0600 /home/hadoop/.ssh/authorized_keys
 
 USER hadoop
 WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
+
+#RUN ssh-keygen -A
+WORKDIR /home/hadoop
+RUN ssh-keygen -t rsa -b 4096 -C "172.20.0.100" -f /home/hadoop/.ssh/id_rsa
+RUN chown hadoop /home/hadoop/.ssh/id_rsa
+RUN chown hadoop /home/hadoop/.ssh/id_rsa.pub
+
+RUN cat /home/hadoop/.ssh/id_rsa >> /home/hadoop/.ssh/authorized_keys
+
+#RUN chmod +x /home/hadoop/.ssh/known_hosts
+#RUN chown hadoop /home/hadoop/.ssh/known_hosts
+
+RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
+RUN cp /etc/ssh/id_rsa /home/hadoop/.ssh/hdp-key
+
+RUN chown -R hadoop:hadoop /home/hadoop/.ssh
+RUN chmod -R 700 /home/hadoop/.ssh 
+RUN chmod 0600 /home/hadoop/.ssh/authorized_keys
 
 RUN echo -e "\nPasswordAuthentication no" >> /etc/ssh/ssh_config
 RUN echo -e "\nChallengeResponseAuthentication no" >> /etc/ssh/ssh_config
@@ -53,9 +54,6 @@ RUN echo -e "\nHost *\n   StrictHostKeyChecking=no\n   UserKnownHostsFile=/dev/n
 RUN echo -e "\nHost *\n    User                   hadoop\n    StrictHostKeyChecking  no\n    IdentityFile          /home/hadoop/.ssh/hdp-key\n" >> /etc/ssh/ssh_config    
 RUN echo -e "\nHost localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
 
-
-
-
 RUN chmod 700 /home/hadoop/.ssh/
 RUN chmod 600 /home/hadoop/.ssh/*
 RUN chown -R hadoop /home/hadoop/.ssh/
@@ -63,20 +61,7 @@ RUN chgrp -R hadoop /home/hadoop/.ssh/
 
 RUN echo "" >> /home/hadoop/.ssh/known_hosts
 RUN chown -v hadoop /home/hadoop/.ssh/known_hosts
-
-RUN chmod 700 /etc/ssh/
-RUN chmod 600 /etc/ssh/*
-RUN chown -R hadoop /etc/ssh/
-RUN chgrp -R hadoop /etc/ssh/
-
-#RUN mkdir -p /root/.ssh/
-#RUN chmod -R 777 /root/.ssh/
-#RUN echo "" >> /root/.ssh/known_hosts
-#RUN chown -v hadoop /etc/ssh/known_hosts
-#RUN rm /root/.ssh/known_hosts 
-
-#TESTE , APAGANDO known_hosts
-RUN rm /home/hadoop/.ssh/known_hosts
+#RUN rm /home/hadoop/.ssh/known_hosts
 
 EXPOSE 22
 EXPOSE 9870 
