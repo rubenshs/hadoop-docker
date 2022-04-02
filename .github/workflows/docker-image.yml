@@ -14,8 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image BASE
-      run: docker build -t rubenss/hadoop:base -f images/dockerfile.centos .
+#    - name: Build the Docker image BASE
+#      run: docker build -t rubenss/hadoop:base -f images/dockerfile.centos .
+    - name: Build the Docker image BASE pull
+      run: docker pull rubenss/hadoop:base
     - name: Build the Docker image HADOOP
       run: docker build -t rubenss/hadoop:latest -f images/dockerfile.hadoop .
     - name: Docker Login
