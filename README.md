@@ -17,6 +17,28 @@ docker exec -it hdpslv2 /bin/bash
 ssh hadoop@172.20.0.100
 ```
 ---
+# ping in host
+```
+ping 172.20.0.100
+ping 172.20.0.210
+ping 172.20.0.220
+```
+---
+---
+# ping in inside container
+```
+ping 172.20.0.100 
+ping hdpmaster
+
+
+ping 172.20.0.210
+ping hdpslv1
+
+
+ping 172.20.0.220
+ping hdpslv2
+```
+---
 # connect via SSH by certificate
 ```
 ssh hadoop@172.20.0.100 -i ~/.ssh/hdp-key
