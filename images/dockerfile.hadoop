@@ -21,7 +21,9 @@ RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chown -R hadoop /home/hadoop /etc/ssh/sshd_config /etc/ssh /usr/local/hadoop/logs
 
+RUN cat /etc/ssh/ssh_host_rsa_key.pub >> /root/.ssh/known_hosts
 RUN cat /etc/ssh/ssh_host_rsa_key.pub >> /home/hadoop/.ssh/authorized_keys
+
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 RUN cp /etc/ssh/ssh_host_rsa_key /home/hadoop/.ssh/hdp-key
 
