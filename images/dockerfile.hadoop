@@ -15,7 +15,8 @@ COPY images/files/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh
 COPY images/files/log4j.properties /usr/local/hadoop/etc/hadoop/log4j.properties
 COPY images/files/.bashrc /home/hadoop/.bashrc
 
-RUN ssh-keygen -A
+#RUN ssh-keygen -A
+RUN ssh-keygen -t rsa -b 4096 -R 172.20.0.100
 
 RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
