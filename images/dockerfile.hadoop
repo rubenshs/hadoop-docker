@@ -52,7 +52,7 @@ RUN echo -e "\nHost *\n    User                   hadoop\n    StrictHostKeyCheck
 RUN echo -e "\nHost localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
 
 RUN chmod 700 /home/hadoop/.ssh/
-RUN chmod 600 /home/hadoop/.ssh/*
+RUN chmod 600 -R /home/hadoop/.ssh/
 RUN chown -R hadoop /home/hadoop/.ssh/
 RUN chgrp -R hadoop /home/hadoop/.ssh/
 
