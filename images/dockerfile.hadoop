@@ -29,11 +29,11 @@ RUN source /home/hadoop/.bashrc
 WORKDIR /home/hadoop -f /home/hadoop/.ssh/id_rsa
 RUN ls -lah /home/hadoop/.ssh/
 
-RUN chown hadoop /home/hadoop/.ssh/id_rsa
-RUN chown hadoop /home/hadoop/.ssh/id_rsa.pub
+RUN chown hadoop /home/hadoop/.ssh/ssh_host_rsa_key
+#RUN chown hadoop /home/hadoop/.ssh/id_rsa.pub
 
-RUN cat /home/hadoop/.ssh/id_rsa >> /home/hadoop/.ssh/authorized_keys
-RUN cp /home/hadoop/.ssh/id_rsa /home/hadoop/.ssh/hdp-key
+RUN cat /home/hadoop/.ssh/ssh_host_rsa_key >> /home/hadoop/.ssh/authorized_keys
+RUN cp /home/hadoop/.ssh/ssh_host_rsa_key /home/hadoop/.ssh/hdp-key
 
 #RUN chmod +x /home/hadoop/.ssh/known_hosts
 #RUN chown hadoop /home/hadoop/.ssh/known_hosts
