@@ -7,7 +7,7 @@ LABEL version="1.0"
 LABEL description="hadoop"
 
 RUN echo "root:1" | chpasswd
-RUN echo "hadoop:" | chpasswd
+RUN echo "hadoop:1" | chpasswd
 
 COPY images/files/*.xml /usr/local/hadoop/etc/hadoop/
 COPY images/files/workers /usr/local/hadoop/etc/hadoop/workers
@@ -22,7 +22,13 @@ RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/
 RUN chown -R hadoop /etc/ssh/sshd_config /etc/ssh/ /usr/local/hadoop/logs
 
 RUN cat /etc/ssh/ssh_host_rsa_key.pub >> /home/hadoop/.ssh/authorized_keys
+
+
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
+
+RUN chown -R hadoop:hadoop /home/hadoop/.ssh
+RUN chmod -R 600 /home/hadoop/.ssh 
+
 RUN cp /etc/ssh/ssh_host_rsa_key /home/hadoop/.ssh/hdp-key
 USER hadoop
 WORKDIR /home/hadoop
