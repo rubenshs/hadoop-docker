@@ -29,7 +29,10 @@ RUN ssh-keygen -A
 RUN cat /etc/ssh/ssh_host_rsa_key >> /etc/ssh/authorized_keys
 RUN chmod 0600 /etc/ssh/authorized_keys
 RUN cp /etc/ssh/ssh_host_rsa_key /etc/ssh/hdp-key
-RUN chown -R hadoop /etc/ssh 
+RUN chmod 700 /etc/ssh
+RUN chmod 600 -R /etc/ssh
+RUN chown -R hadoop /etc/ssh
+RUN chgrp -R hadoop /etc/ssh
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 
 RUN echo -e "\nPasswordAuthentication no" >> /etc/ssh/ssh_config
@@ -42,11 +45,6 @@ RUN echo -e "\nGSSAPICleanupCredentials no" >> /etc/ssh/ssh_config
 RUN echo -e "\nHost *\n   StrictHostKeyChecking=no\n   UserKnownHostsFile=/dev/null\n" >> /etc/ssh/ssh_config
 RUN echo -e "\nHost *\n    User                   hadoop\n    StrictHostKeyChecking  no\n    IdentityFile          /home/hadoop/.ssh/hdp-key\n" >> /etc/ssh/ssh_config    
 RUN echo -e "\nHost localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
-
-RUN chmod 700 /home/hadoop/.ssh/
-RUN chmod 600 -R /home/hadoop/.ssh/
-RUN chown -R hadoop /home/hadoop/.ssh/
-RUN chgrp -R hadoop /home/hadoop/.ssh/
 
 EXPOSE 22
 EXPOSE 9870 
