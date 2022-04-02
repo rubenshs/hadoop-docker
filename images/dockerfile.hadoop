@@ -35,7 +35,7 @@ WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
 
 RUN echo -e "\nPasswordAuthentication no\n" >> /etc/ssh/ssh_config
-RUN echo -e "\ChallengeResponseAuthentication no\n" >> /etc/ssh/ssh_config
+RUN echo -e "\nChallengeResponseAuthentication no\n" >> /etc/ssh/ssh_config
 RUN echo -e "\nHost *\n   StrictHostKeyChecking=no\n   UserKnownHostsFile=/dev/null\n" >> /etc/ssh/ssh_config
 RUN echo -e "\nHost *\n    User                   hadoop\n    StrictHostKeyChecking  no\n    IdentityFile          /home/hadoop/.ssh/hdp-key\n" >> /etc/ssh/ssh_config
     
