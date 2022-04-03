@@ -31,33 +31,28 @@ RUN ssh-keygen -A
 
 RUN cat /etc/ssh/ssh_host_rsa_key >> /etc/ssh/authorized_keys
 RUN chmod 0600 /etc/ssh/authorized_keys
+
 RUN cp /etc/ssh/ssh_host_rsa_key /etc/ssh/hdp-key
 
 RUN chown -R hadoop /etc/ssh
 RUN chgrp -R hadoop /etc/ssh
 
-RUN chmod -R 0600 /etc/ssh/*
-RUN chmod 0700 /etc/ssh/
-RUN chmod -R 0644 /etc/ssh/*.pub
+RUN chmod -R 600 /etc/ssh/*
+RUN chmod 700 /etc/ssh/
+RUN chmod -R 644 /etc/ssh/*.pub
 
 RUN sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+RUN sed -i 's/ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/g' /etc/ssh/sshd_config
+RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+RUN sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+RUN sed -i 's/GSSAPIAuthentication/#GSSAPIAuthentication/g' /etc/ssh/sshd_config
+RUN sed -i 's/GSSAPICleanupCredentials/#GSSAPICleanupCredentials/g' /etc/ssh/sshd_config
 
-RUN echo -e "\nPasswordAuthentication no" >> /etc/ssh/ssh_config
-RUN echo -e "\nChallengeResponseAuthentication no" >> /etc/ssh/ssh_config
-RUN echo -e "\nUsePAM no" >> /etc/ssh/ssh_config
-RUN echo -e "\nPermitRootLogin no" >> /etc/ssh/ssh_config
-RUN echo -e "\nPubkeyAuthentication yes" >> /etc/ssh/ssh_config
-RUN echo -e "\nGSSAPIAuthentication yes" >> /etc/ssh/ssh_config
-RUN echo -e "\nGSSAPICleanupCredentials no" >> /etc/ssh/ssh_config
-RUN echo -e "\nHost *\n   StrictHostKeyChecking=no\n   UserKnownHostsFile=/dev/null\n" >> /etc/ssh/ssh_config
-RUN echo -e "\nHost *\n    User                   hadoop\n    StrictHostKeyChecking  no\n    IdentityFile          /home/hadoop/.ssh/hdp-key\n" >> /etc/ssh/ssh_config    
-RUN echo -e "\nHost localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
-
-
+#RUN echo -e "Host *\n   StrictHostKeyChecking=no\n   UserKnownHostsFile=/dev/null\n" >> /etc/ssh/ssh_config
+#RUN echo -e "Host *\n    User                   hadoop\n    StrictHostKeyChecking  no\n    IdentityFile          /home/hadoop/.ssh/hdp-key\n" >> /etc/ssh/ssh_config    
+#RUN echo -e "Host localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
 
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
-
-
 
 EXPOSE 22
 EXPOSE 9870 
