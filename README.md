@@ -1,5 +1,25 @@
 # how to use
 ```
+docker pull rubenss/hadoop:latest
+
+wget https://raw.githubusercontent.com/rubenshs/hadoop-docker/main/images/docker-compose.yml
+
+docker-compose up
+
+sudo docker cp hdpmaster:/home/hadoop/.ssh /home/${USER}/teste
+sudo chmod -R 777 /home/${USER}/teste/.ssh/
+
+rm /home/${USER}/.ssh/known_hosts
+ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/ssh_host_rsa_key
+```
+---
+# if you need to access via docker
+```
+docker exec -it hdpmaster bash
+```
+---
+# how to use
+```
 docker pull rubenss/hadoop:latest /
 wget https://raw.githubusercontent.com/rubenshs/hadoop-docker/main/images/docker-compose.yml /
 docker-compose up
@@ -14,16 +34,16 @@ docker exec -it hdpslv2 /bin/bash
 ---
 ### copy the .ssh folder to be able to access with certificate
 ```
-sudo docker cp hdpmaster:/home/hadoop/.ssh /home/loester/teste
-sudo chmod -R 766 /home/loester/teste/.ssh
+sudo docker cp hdpmaster:/home/hadoop/.ssh /home/${USER}/teste
+sudo chmod -R 766 /home/${USER}/teste/.ssh
 ```
 ### connect via ssh via certificate
 ```
-ssh hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
+ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/hdp-key
 ```
 ### run the ssh debug
 ```
-ssh -vvv hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
+ssh -vvv hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/hdp-key
 ```
 ---
 # ping in host
