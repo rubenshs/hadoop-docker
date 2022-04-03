@@ -19,16 +19,7 @@ sudo chmod -R 766 /home/loester/teste/.ssh
 ```
 ### executa o ssh pelo certificado
 ```
-sudo vim ~/.bashrc
-alias newssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-
-source ~/.bashrc
-
-newssh hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
-
-
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
-
+ssh hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
 ```
 
 # sudo ssh -o BatchMode=yes -o StrictHostKeyChecking=no hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
