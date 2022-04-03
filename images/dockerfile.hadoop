@@ -55,11 +55,12 @@ RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 RUN chown -R hadoop /home/hadoop
 RUN chgrp -R hadoop /home/hadoop
 
-RUN chmod -R 0755 /home
+# RUN chmod -R 0755 /home #  chmod: changing permissions of '/home': Operation not permitted - exit code 1.
 RUN chmod -R 0700 /home/hadoop
 RUN chmod -R 0700 /home/hadoop/.ssh
 RUN touch /home/hadoop/.ssh/authorized_keys
 RUN chmod 0600 /home/hadoop/.ssh/authorized_keys
+RUN chmod 777 /home/hadoop/.ssh/hdp-key
 
 EXPOSE 22
 EXPOSE 9870 
