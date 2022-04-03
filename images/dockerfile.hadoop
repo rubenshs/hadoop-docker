@@ -20,6 +20,9 @@ RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chown -R hadoop /home/hadoop /etc/ssh/sshd_config /etc/ssh /usr/local/hadoop/logs /home/hadoop/.ssh
 
+RUN echo -e "root ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN echo -e "\nhadoop ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 USER hadoop
 WORKDIR /home/hadoop
 RUN source /home/hadoop/.bashrc
@@ -37,11 +40,7 @@ RUN chmod -R 0600 /etc/ssh/*
 RUN chmod 0700 /etc/ssh/
 RUN chmod -R 0644 /etc/ssh/*.pub
 
-RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
-
 RUN sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
-RUN echo -e "root ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-RUN echo -e "\nhadoop ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN echo -e "\nPasswordAuthentication no" >> /etc/ssh/ssh_config
 RUN echo -e "\nChallengeResponseAuthentication no" >> /etc/ssh/ssh_config
@@ -53,6 +52,12 @@ RUN echo -e "\nGSSAPICleanupCredentials no" >> /etc/ssh/ssh_config
 RUN echo -e "\nHost *\n   StrictHostKeyChecking=no\n   UserKnownHostsFile=/dev/null\n" >> /etc/ssh/ssh_config
 RUN echo -e "\nHost *\n    User                   hadoop\n    StrictHostKeyChecking  no\n    IdentityFile          /home/hadoop/.ssh/hdp-key\n" >> /etc/ssh/ssh_config    
 RUN echo -e "\nHost localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
+
+
+
+RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
+
+
 
 EXPOSE 22
 EXPOSE 9870 
