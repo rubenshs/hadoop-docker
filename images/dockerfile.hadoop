@@ -42,18 +42,18 @@ RUN chmod -R 0700 /etc/ssh
 RUN sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 RUN sed -i 's/ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/g' /etc/ssh/sshd_config
 RUN sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
-RUN sed -i 's/GSSAPIAuthentication/#GSSAPIAuthentication/g' /etc/ssh/sshd_config
-RUN sed -i 's/GSSAPICleanupCredentials/#GSSAPICleanupCredentials/g' /etc/ssh/sshd_config
+RUN sed -i 's/GSSAPIAuthentication yes/#GSSAPIAuthentication no/g' /etc/ssh/sshd_config
+RUN sed -i 's/GSSAPICleanupCredentials yes/#GSSAPICleanupCredentials no/g' /etc/ssh/sshd_config
+RUN sed -i 's/UsePAM no/UsePAM yes/g' /etc/ssh/sshd_config
 
-#RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
 #RUN echo -e "Host *\n   StrictHostKeyChecking=no\n   UserKnownHostsFile=/dev/null\n" >> /etc/ssh/ssh_config
 #RUN echo -e "Host *\n    User                   hadoop\n    StrictHostKeyChecking  no\n    IdentityFile          /home/hadoop/.ssh/hdp-key\n" >> /etc/ssh/ssh_config    
 #RUN echo -e "Host localhost\n        HostName localhost\n        UserKnownHostsFile=/dev/null\n        StrictHostKeyChecking=no\n" >> /etc/ssh/ssh_config
 
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 
-RUN chown -R hadoop /home
-RUN chgrp -R hadoop /home
+RUN chown -R hadoop /home/hadoop
+RUN chgrp -R hadoop /home/hadoop
 
 RUN chmod -R 0755 /home
 RUN chmod -R 0700 /home/hadoop
