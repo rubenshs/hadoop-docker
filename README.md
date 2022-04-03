@@ -15,7 +15,7 @@ docker exec -it hdpslv2 /bin/bash
 ### copiar a pasta do .ssh para poder acessar com certificado
 ```
 sudo docker cp hdpmaster:/home/hadoop/.ssh /home/loester/teste
-sudo chmod -R 777 /home/loester/teste/.ssh/idrsa
+sudo chmod -R 777 /home/loester/teste/.ssh
 ```
 ### executa o ssh pelo certificado
 ```
@@ -25,6 +25,10 @@ alias newssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 source ~/.bashrc
 
 newssh hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
+
+
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
+
 ```
 
 # sudo ssh -o BatchMode=yes -o StrictHostKeyChecking=no hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
