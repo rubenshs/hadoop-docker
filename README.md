@@ -12,26 +12,18 @@ docker exec -it hdpslv1 /bin/bash
 docker exec -it hdpslv2 /bin/bash
 ```
 ---
-### copiar a pasta do .ssh para poder acessar com certificado
+### copy the .ssh folder to be able to access with certificate
 ```
 sudo docker cp hdpmaster:/home/hadoop/.ssh /home/loester/teste
 sudo chmod -R 766 /home/loester/teste/.ssh
 ```
-### executa o ssh pelo certificado
+### connect via ssh via certificate
 ```
 ssh hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
 ```
-### executa o ssh pelo certificado
+### run the ssh debug
 ```
 ssh -vvv hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
-```
-
-# sudo ssh -o BatchMode=yes -o StrictHostKeyChecking=no hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
-```
----
-# connect via SSH by password
-```
-ssh hadoop@172.20.0.100
 ```
 ---
 # ping in host
