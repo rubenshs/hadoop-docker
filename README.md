@@ -15,7 +15,7 @@ docker exec -it hdpslv2 /bin/bash
 ### copiar a pasta do .ssh para poder acessar com certificado
 ```
 sudo docker cp hdpmaster:/home/hadoop/.ssh /home/loester/teste
-sudo chmod -R 777 /home/loester/teste/.ssh
+sudo chmod -R 766 /home/loester/teste/.ssh
 ```
 ### executa o ssh pelo certificado
 ```

@@ -29,13 +29,17 @@ RUN ssh-keygen -A
 RUN cat /etc/ssh/ssh_host_rsa_key >> /etc/ssh/authorized_keys
 RUN chmod 0600 /etc/ssh/authorized_keys
 RUN cp /etc/ssh/ssh_host_rsa_key /etc/ssh/hdp-key
-#RUN chmod 600 -R /etc/ssh
-#RUN chmod 700 /etc/ssh
+
 RUN chown -R hadoop /etc/ssh
 RUN chgrp -R hadoop /etc/ssh
-RUN chmod -R 766 /etc/ssh
+
+RUN chmod -R 0600 /etc/ssh/*
+RUN chmod 0700 /etc/ssh/
+RUN chmod -R 0644 /etc/ssh/*.pub
+
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 
+RUN sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 RUN echo -e "root ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN echo -e "\nhadoop ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
