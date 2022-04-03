@@ -21,6 +21,10 @@ sudo chmod -R 766 /home/loester/teste/.ssh
 ```
 ssh hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
 ```
+### executa o ssh pelo certificado
+```
+ssh -vvv hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
+```
 
 # sudo ssh -o BatchMode=yes -o StrictHostKeyChecking=no hadoop@172.20.0.100 -i /home/loester/teste/.ssh/hdp-key
 ```
