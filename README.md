@@ -1,4 +1,4 @@
-# how to use
+# how to use - docker-compose
 ```
 docker pull rubenss/hadoop:latest
 
@@ -11,6 +11,21 @@ sudo chmod -R 777 /home/${USER}/teste/.ssh/
 
 rm /home/${USER}/.ssh/known_hosts
 ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/ssh_host_rsa_key
+```
+---
+
+# how to use - build from project
+```
+git clone https://github.com/rubenshs/hadoop-docker
+cd hadoop-docker
+
+# windows
+cd shell-bat-windows
+./build_all.bat
+
+# linux
+cd shell-sh-linux
+./build_all.sh
 ```
 ---
 # if you need to access via docker
