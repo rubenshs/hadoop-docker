@@ -7,6 +7,36 @@ sudo docker cp hdpmaster:/home/hadoop/.ssh /home/${USER}/teste
 sudo chmod -R 777 /home/loester/teste/
 rm /home/${USER}/.ssh/known_hosts
 ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/hdp-key -o StrictHostKeyChecking=no
+
+hdfs namenode -format
+$HADOOP_HOME/sbin/start-dfs.sh
+
+
+http://172.20.0.100:9870
+http://172.20.0.100:9864
+
+hdfs dfsadmin -report
+$HADOOP_HOME/sbin/start-yarn.sh
+
+
+wget http://datascienceacademy.com.br/blog/aluno/RFundamentos/Datasets/Parte2/questoes.csv
+
+hdfs dfs -mkdir /datasets
+hdfs dfs -put questoes.csv /datasets
+hdfs dfs -ls /datasets
+
+yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.0.jar wordcount "/datasets/questoes.csv" output
+
+
+hdfs dfs -cat output/part-r-00000
+yarn node -list
+yarn application -list
+
+http://192.168.1.76:8088/cluster
+
+$HADOOP_HOME/sbin/stop-yarn.sh
+$HADOOP_HOME/sbin/stop-dfs.sh
+
 ```
 ---
 
