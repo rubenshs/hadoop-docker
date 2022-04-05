@@ -1,16 +1,12 @@
 # how to use - docker-compose
 ```
 docker pull rubenss/hadoop:latest
-
 wget https://raw.githubusercontent.com/rubenshs/hadoop-docker/main/images/docker-compose.yml
-
 docker-compose up
-
 sudo docker cp hdpmaster:/home/hadoop/.ssh /home/${USER}/teste
-sudo chmod -R 777 /home/${USER}/teste/.ssh/
-
+sudo chmod -R 777 /home/loester/teste/
 rm /home/${USER}/.ssh/known_hosts
-ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/ssh_host_rsa_key
+ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/hdp-key
 ```
 ---
 
@@ -85,13 +81,13 @@ ping hdpslv2
 ---
 # connect via SSH by certificate
 ```
-ssh hadoop@172.20.0.100 -i ~/.ssh/hdp-key
-ssh hadoop@172.20.0.210 -i ~/.ssh/hdp-key
-ssh hadoop@172.20.0.220 -i ~/.ssh/hdp-key
+ssh hadoop@172.20.0.100 -i ~/.ssh/hdp-key.pub
+ssh hadoop@172.20.0.210 -i ~/.ssh/hdp-key.pub
+ssh hadoop@172.20.0.220 -i ~/.ssh/hdp-key.pub
 ```
 # connect via SSH by port
 ```
-ssh hadoop@172.20.0.100 -p 2201 -i ~/.ssh/hdp-key
-ssh hadoop@172.20.0.210 -p 2202 -i ~/.ssh/hdp-key
-ssh hadoop@172.20.0.220 -p 2203 -i ~/.ssh/hdp-key
+ssh hadoop@172.20.0.100 -p 2201 -i ~/.ssh/hdp-key.pub
+ssh hadoop@172.20.0.210 -p 2202 -i ~/.ssh/hdp-key.pub
+ssh hadoop@172.20.0.220 -p 2203 -i ~/.ssh/hdp-key.pub
 ```
