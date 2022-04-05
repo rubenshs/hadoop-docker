@@ -32,23 +32,28 @@ RUN chgrp -R hadoop /home/hadoop
 
 RUN ssh-keygen -A
 
-RUN cat /etc/ssh/ssh_host_rsa_key.pub >> /etc/ssh/authorized_keys
-
 RUN cp /etc/ssh/ssh_host_rsa_key /etc/ssh/hdp-key
+RUN cp /etc/ssh/ssh_host_rsa_key.pub /etc/ssh/hdp-key.pub
+
+RUN cat /etc/ssh/hdp-key.pub >> /etc/ssh/authorized_keys
 
 RUN chown -R hadoop /etc/ssh
 RUN chgrp -R hadoop /etc/ssh
 
-RUN chmod -R 0700 /etc/ssh
-RUN chmod 0600 /etc/ssh/authorized_keys
+RUN chmod 700 /etc/ssh
+RUN chmod 600 /etc/ssh/authorized_keys
+RUN chmod 777 /etc/ssh/hdp-key
+RUN chmod 777 /etc/ssh/hdp-key.pub
 
 RUN sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 RUN sed -i 's/ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/g' /etc/ssh/sshd_config
 RUN sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+RUN sed -i 's/GSSAPIKeyExchange yes/GSSAPIKeyExchange no/g' /etc/ssh/sshd_config
 RUN sed -i 's/GSSAPIAuthentication no/GSSAPIAuthentication yes/g' /etc/ssh/sshd_config
 RUN sed -i 's/GSSAPICleanupCredentials yes/GSSAPICleanupCredentials no/g' /etc/ssh/sshd_config
 RUN sed -i 's/UsePAM no/UsePAM yes/g' /etc/ssh/sshd_config
 RUN sed -i 's/PubkeyAuthentication no/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/#GSSAPIKeyExchange/GSSAPIKeyExchange/g' /etc/ssh/sshd_config
 RUN sed -i 's/#PubkeyAuthentication/PubkeyAuthentication/g' /etc/ssh/sshd_config
 RUN sed -i 's/#GSSAPIAuthentication/GSSAPIAuthentication/g' /etc/ssh/sshd_config
 RUN sed -i 's/#GSSAPICleanupCredentials/GSSAPICleanupCredentials/g' /etc/ssh/sshd_config
@@ -56,12 +61,11 @@ RUN sed -i 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
 
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 
-# RUN chmod -R 0755 /home #  chmod: changing permissions of '/home': Operation not permitted - exit code 1.
-RUN chmod -R 0700 /home/hadoop
-RUN chmod -R 0700 /home/hadoop/.ssh
-RUN touch /home/hadoop/.ssh/authorized_keys
-RUN chmod 0700 /home/hadoop/.ssh/hdp-key
-RUN chmod 0600 /home/hadoop/.ssh/authorized_keys
+RUN chmod 700 /home/hadoop
+RUN chmod 700 /home/hadoop/.ssh
+RUN chmod 600 /home/hadoop/.ssh/authorized_keys
+RUN chmod 777 /home/hadoop/.ssh/hdp-key
+RUN chmod 777 /home/hadoop/.ssh/hdp-key.pub
 
 EXPOSE 22
 EXPOSE 9870 
