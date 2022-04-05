@@ -42,8 +42,8 @@ RUN chgrp -R hadoop /etc/ssh
 
 RUN chmod 700 /etc/ssh
 RUN chmod 600 /etc/ssh/authorized_keys
-RUN chmod 777 /etc/ssh/hdp-key
-RUN chmod 777 /etc/ssh/hdp-key.pub
+RUN chmod 600 /etc/ssh/hdp-key
+RUN chmod 644 /etc/ssh/hdp-key.pub
 
 RUN sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 RUN sed -i 's/ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/g' /etc/ssh/sshd_config
@@ -64,8 +64,8 @@ RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 RUN chmod 700 /home/hadoop
 RUN chmod 700 /home/hadoop/.ssh
 RUN chmod 600 /home/hadoop/.ssh/authorized_keys
-RUN chmod 777 /home/hadoop/.ssh/hdp-key
-RUN chmod 777 /home/hadoop/.ssh/hdp-key.pub
+RUN chmod 600 /home/hadoop/.ssh/hdp-key
+RUN chmod 644 /home/hadoop/.ssh/hdp-key.pub
 
 EXPOSE 22
 EXPOSE 9870 
