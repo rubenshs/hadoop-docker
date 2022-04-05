@@ -6,7 +6,7 @@ docker-compose up
 sudo docker cp hdpmaster:/home/hadoop/.ssh /home/${USER}/teste
 sudo chmod -R 777 /home/loester/teste/
 rm /home/${USER}/.ssh/known_hosts
-ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/hdp-key
+ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/hdp-key -o StrictHostKeyChecking=no
 ```
 ---
 
@@ -81,13 +81,25 @@ ping hdpslv2
 ---
 # connect via SSH by certificate
 ```
-ssh hadoop@172.20.0.100 -i ~/.ssh/hdp-key.pub
-ssh hadoop@172.20.0.210 -i ~/.ssh/hdp-key.pub
-ssh hadoop@172.20.0.220 -i ~/.ssh/hdp-key.pub
+ssh hadoop@172.20.0.100 -i ~/.ssh/hdp-key
+ssh hadoop@172.20.0.210 -i ~/.ssh/hdp-key
+ssh hadoop@172.20.0.220 -i ~/.ssh/hdp-key
 ```
 # connect via SSH by port
 ```
-ssh hadoop@172.20.0.100 -p 2201 -i ~/.ssh/hdp-key.pub
-ssh hadoop@172.20.0.210 -p 2202 -i ~/.ssh/hdp-key.pub
-ssh hadoop@172.20.0.220 -p 2203 -i ~/.ssh/hdp-key.pub
+ssh hadoop@172.20.0.100 -p 2201 -i ~/.ssh/hdp-key
+ssh hadoop@172.20.0.210 -p 2202 -i ~/.ssh/hdp-key
+ssh hadoop@172.20.0.220 -p 2203 -i ~/.ssh/hdp-key
 ```
+
+| Directory or File      | Permissions
+|---|---|
+| ~/.ssh/                | 700
+| ~/.ssh/authorized_keys | 600
+| ~/.ssh/config          | 600
+| ~/.ssh/identity        | 600
+| ~/.ssh/id_dsa          | 600
+| ~/.ssh/id_rsa          | 600
+| ~/.ssh/identity.pub    | 644
+| ~/.ssh/id_dsa.pub      | 644
+| ~/.ssh/id_rsa.pub      | 644

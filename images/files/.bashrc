@@ -12,7 +12,7 @@ export HADOOP_HDFS_HOME=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
 export HADOOP_YARN_HOME=$HADOOP_HOME
 export SBIN=$HADOOP_HOME/sbin
-export HADOOP_SSH_OPTS="-i ~/.ssh/hdp-key"
+export HADOOP_SSH_OPTS="-i ~/.ssh/hdp-key -o StrictHostKeyChecking=no"
 export HDFS_NAMENODE_USER=hadoop
 export HDFS_DATANODE_USER=hadoop
 export HDFS_SECONDARYNAMENODE_USER=hadoop

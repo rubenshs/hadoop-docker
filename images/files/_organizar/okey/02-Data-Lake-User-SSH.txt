@@ -35,9 +35,9 @@ ssh-keygen
 
 # Copia a chave
 
-ssh-copy-id -i ~/.ssh/hdp-key.pub hadoop@hdpslv1
-ssh-copy-id -i ~/.ssh/hdp-key.pub hadoop@hdpslv2
-ssh-copy-id -i ~/.ssh/hdp-key.pub hadoop@hdpmaster
+ssh-copy-id -i ~/.ssh/hdp-key hadoop@hdpslv1
+ssh-copy-id -i ~/.ssh/hdp-key hadoop@hdpslv2
+ssh-copy-id -i ~/.ssh/hdp-key hadoop@hdpmaster
 
 
 # Testa a conexão
