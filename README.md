@@ -32,7 +32,9 @@ hdfs dfs -cat output/part-r-00000
 yarn node -list
 yarn application -list
 
-http://192.168.1.76:8088/cluster
+http://172.20.0.100:8080/cluster
+
+jps
 
 $HADOOP_HOME/sbin/stop-yarn.sh
 $HADOOP_HOME/sbin/stop-dfs.sh
