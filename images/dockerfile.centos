@@ -23,3 +23,33 @@ RUN rm -R /usr/local/hadoop/hadoop-3.1.0
 RUN useradd hadoop -m -d /home/hadoop 
 RUN usermod -aG wheel hadoop
 RUN chown -R hadoop /usr/local/hadoop /home/hadoop
+
+RUN ssh-keygen -A
+
+RUN cp /etc/ssh/ssh_host_rsa_key /etc/ssh/key
+RUN cp /etc/ssh/ssh_host_rsa_key.pub /etc/ssh/key.pub
+
+RUN cat /etc/ssh/key.pub >> /etc/ssh/authorized_keys
+
+RUN chmod 0700 /etc/ssh
+RUN chmod 0644 /etc/ssh/authorized_keys
+RUN chmod 0600 /etc/ssh/key
+RUN chmod 0644 /etc/ssh/key.pub
+
+RUN sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/g' /etc/ssh/sshd_config
+RUN sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+RUN sed -i 's/GSSAPIKeyExchange yes/GSSAPIKeyExchange no/g' /etc/ssh/sshd_config
+RUN sed -i 's/GSSAPIAuthentication no/GSSAPIAuthentication yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/GSSAPICleanupCredentials yes/GSSAPICleanupCredentials no/g' /etc/ssh/sshd_config
+RUN sed -i 's/UsePAM no/UsePAM yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/PubkeyAuthentication no/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/#GSSAPIKeyExchange/GSSAPIKeyExchange/g' /etc/ssh/sshd_config
+RUN sed -i 's/#PubkeyAuthentication/PubkeyAuthentication/g' /etc/ssh/sshd_config
+RUN sed -i 's/#GSSAPIAuthentication/GSSAPIAuthentication/g' /etc/ssh/sshd_config
+RUN sed -i 's/#GSSAPICleanupCredentials/GSSAPICleanupCredentials/g' /etc/ssh/sshd_config
+RUN sed -i 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]

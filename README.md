@@ -6,7 +6,7 @@ docker-compose up
 sudo docker cp hdpmaster:/home/hadoop/.ssh /home/${USER}/teste
 sudo chmod -R 777 /home/loester/teste/
 rm /home/${USER}/.ssh/known_hosts
-ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/hdp-key -o StrictHostKeyChecking=no
+ssh hadoop@172.20.0.100 -i /home/${USER}/teste/.ssh/key -o StrictHostKeyChecking=no
 
 hdfs namenode -format
 $HADOOP_HOME/sbin/start-dfs.sh
