@@ -1,0 +1,14 @@
+# Instalação Data Lake
+
+# Instalando e Configurando o Hadoop
+
+# Como usuário hadoop no Node Master, formatar o NameNode:
+
+su - hadoop
+hdfs namenode -format
+
+
+# Iniciar o HDFS (trouleshooting do problema com o Java)
+
+$HADOOP_HOME/sbin/start-dfs.sh
+
