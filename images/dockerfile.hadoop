@@ -29,13 +29,10 @@ RUN source /home/hadoop/.bashrc
 RUN chown -R hadoop /home/hadoop
 RUN chgrp -R hadoop /home/hadoop
 
-RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
-
 RUN chmod 0700 /home/hadoop
 RUN chmod 0700 /home/hadoop/.ssh
-RUN chmod 0644 /home/hadoop/.ssh/authorized_keys
-RUN chmod 0600 /home/hadoop/.ssh/key
-RUN chmod 0644 /home/hadoop/.ssh/key.pub
+
+RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 
 EXPOSE 8088
 EXPOSE 9870
