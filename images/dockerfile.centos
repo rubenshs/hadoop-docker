@@ -50,6 +50,8 @@ RUN sed -i 's/#GSSAPIAuthentication/GSSAPIAuthentication/g' /etc/ssh/sshd_config
 RUN sed -i 's/#GSSAPICleanupCredentials/GSSAPICleanupCredentials/g' /etc/ssh/sshd_config
 RUN sed -i 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
 
+RUN echo "TESTE";
+
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
