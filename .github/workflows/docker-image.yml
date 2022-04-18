@@ -19,7 +19,7 @@ jobs:
     - name: Build the Docker image HADOOP
       run: docker build -t rubenss/hadoop:hadoop -f images_hadoop/dockerfile.hadoop .
     - name: Build the Docker image SPARK
-      run: docker build -t rubenss/hadoop:spark -f images_spark/dockerfile.hadoop .      
+      run: docker build -t rubenss/hadoop:spark -f images_spark/dockerfile.spark .      
     - name: Docker Login
       run: docker login -u rubenss -p ${{ secrets.DOCKERHUB }}
     - name: Docker Push all tags
