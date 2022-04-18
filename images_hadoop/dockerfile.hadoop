@@ -9,11 +9,11 @@ LABEL description="hadoop"
 RUN echo "root:1" | chpasswd
 RUN echo "hadoop:1" | chpasswd
 
-COPY images_hadoop//files/*.xml /usr/local/hadoop/etc/hadoop/
-COPY images_hadoop//files/workers /usr/local/hadoop/etc/hadoop/workers
-COPY images_hadoop//files/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh
-COPY images_hadoop//files/log4j.properties /usr/local/hadoop/etc/hadoop/log4j.properties
-COPY images_hadoop//files/.bashrc /home/hadoop/.bashrc
+COPY images_hadoop/files/*.xml /usr/local/hadoop/etc/hadoop/
+COPY images_hadoop/files/workers /usr/local/hadoop/etc/hadoop/workers
+COPY images_hadoop/files/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh
+COPY images_hadoop/files/log4j.properties /usr/local/hadoop/etc/hadoop/log4j.properties
+COPY images_hadoop/files/.bashrc /home/hadoop/.bashrc
 
 RUN mkdir -p /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
 RUN chmod -R 777 /etc/ssh/sshd_config /usr/local/hadoop/logs /home/hadoop /home/hadoop/.ssh
