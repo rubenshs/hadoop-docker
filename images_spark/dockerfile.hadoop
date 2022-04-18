@@ -1,0 +1,3 @@
+FROM rubenss/hadoop:hadoop
+
+RUN echo "spark"

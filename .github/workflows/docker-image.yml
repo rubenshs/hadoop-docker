@@ -15,14 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image BASE
-      run: docker build -t rubenss/hadoop:base -f images/dockerfile.centos .
+      run: docker build -t rubenss/hadoop:base -f images_base/dockerfile.centos .
     - name: Build the Docker image BASE pull
       run: docker pull rubenss/hadoop:base
     - name: Build the Docker image HADOOP
-      run: docker build -t rubenss/hadoop:latest -f images/dockerfile.hadoop .
+      run: docker build -t rubenss/hadoop:hadoop -f images_hadoop/dockerfile.hadoop .
+    - name: Build the Docker image SPARK
+      run: docker build -t rubenss/hadoop:spark -f images_spark/dockerfile.hadoop .      
     - name: Docker Login
       run: docker login -u rubenss -p ${{ secrets.DOCKERHUB }}
     - name: Docker Push all tags
       run: docker push --all-tags rubenss/hadoop
-#    - name: Docker Push latest
-#      run: docker push rubenss/hadoop:latest
