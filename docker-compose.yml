@@ -6,7 +6,7 @@ networks:
         - subnet: 172.20.0.0/24
 services:
   namenode:
-    image: 'rubenss/hadoop:latest'
+    image: 'rubenss/hadoop:spark'
     hostname: hdpmaster
     networks:
       mynetwork:
@@ -21,7 +21,7 @@ services:
     volumes:
       - 'hadoop_namenode:/hadoop/dfs/name'
   datanode1:
-    image: 'rubenss/hadoop:latest'
+    image: 'rubenss/hadoop:hadoop'
     hostname: hdpslv1
     networks:
       mynetwork:
@@ -35,7 +35,7 @@ services:
     environment:
       SERVICE_PRECONDITION: 'namenode:9870'
   datanode2:
-    image: 'rubenss/hadoop:latest'
+    image: 'rubenss/hadoop:hadoop'
     hostname: hdpslv2
     networks:
       mynetwork:
