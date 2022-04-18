@@ -1,7 +1,7 @@
 # how to use - docker-compose
 ```
 docker pull rubenss/hadoop:latest
-wget https://raw.githubusercontent.com/rubenshs/hadoop-docker/main/images/docker-compose.yml
+wget https://raw.githubusercontent.com/rubenshs/hadoop-docker/main/docker-compose.yml
 docker-compose up
 sudo docker cp hdpmaster:/home/hadoop/.ssh /home/${USER}/teste
 sudo chmod -R 777 /home/loester/teste/

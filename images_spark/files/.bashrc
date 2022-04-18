@@ -1,0 +1,23 @@
+export PDSH_RCMD_TYPE=ssh
+export USER=hadoop
+export PASSWORD=1
+export HOME=/home/hadoop
+export JAVA_HOME=/usr/java/jdk1.8.0_181/
+export JRE_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
+export RELEASE=3.1.0
+export HADOOP_HOME="/usr/local/hadoop"
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_YARN_HOME=$HADOOP_HOME
+export SBIN=$HADOOP_HOME/sbin
+export HADOOP_SSH_OPTS="-i ~/.ssh/key -o StrictHostKeyChecking=no"
+export HDFS_NAMENODE_USER=hadoop
+export HDFS_DATANODE_USER=hadoop
+export HDFS_SECONDARYNAMENODE_USER=hadoop
+export YARN_RESOURCEMANAGER_USER=hadoop
+export YARN_NODEMANAGER_USER=hadoop
+export SPARK_HOME=/opt/spark
+export PYSPARK_PYTHON=/usr/bin/python3
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
