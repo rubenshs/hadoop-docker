@@ -16,7 +16,7 @@ WORKDIR /opt
 USER hadoop
 
 WORKDIR /home/hadoop
-COPY images/files/.bashrc /home/hadoop/.bashrc
+COPY images_spark/files/.bashrc /home/hadoop/.bashrc
 RUN source /home/hadoop/.bashrc
 
 RUN java -version; javac -version; scala -version; git --version
