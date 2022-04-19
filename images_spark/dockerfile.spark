@@ -17,6 +17,7 @@ USER hadoop
 
 WORKDIR /home/hadoop
 COPY images_spark/files/.bashrc /home/hadoop/.bashrc
+COPY images_spark/files/spark-defaults.conf /opt/spark/conf/spark-defaults.conf
 RUN source /home/hadoop/.bashrc
 
 RUN java -version; javac -version; scala -version; git --version
