@@ -34,7 +34,7 @@ RUN chmod 0700 /home/hadoop/.ssh
 
 RUN cp -R /etc/ssh/* /home/hadoop/.ssh/
 
-RUN hdfs namenode -format
+#RUN hdfs namenode -format
 
 EXPOSE 8088
 EXPOSE 9870
