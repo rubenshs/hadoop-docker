@@ -24,3 +24,4 @@ RUN source /home/hadoop/.bashrc
 RUN java -version; javac -version; scala -version; git --version
 
 EXPOSE 8080
+EXPOSE 8088

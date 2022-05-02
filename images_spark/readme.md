@@ -44,5 +44,5 @@ spark-submit --deploy-mode cluster \
                --class org.apache.spark.examples.SparkPi \
                $SPARK_HOME/examples/jars/spark-examples_2.11-2.3.0.jar 10
 
-spark-submit --deploy-mode cluster --class org.apache.spark.examples.SparkPi $SPARK_HOME/examples/jars/spark-examples_2.12-3.2.0.jar
+spark-submit --deploy-mode cluster --class org.apache.spark.examples.SparkPi $SPARK_HOME/examples/jars/spark-examples_2.11-2.3.0.jar 10
 ```
