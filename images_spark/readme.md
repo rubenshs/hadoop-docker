@@ -36,7 +36,7 @@ start-all.sh
 stop-all.sh
 ```
 
-### Testando o Spark
+### Testing Spark
 Após a execução você deve ver o status como SUCCEEDED!
 
 ```
@@ -45,4 +45,13 @@ spark-submit --deploy-mode cluster \
                $SPARK_HOME/examples/jars/spark-examples_2.11-2.3.0.jar 10
 
 spark-submit --deploy-mode cluster --class org.apache.spark.examples.SparkPi $SPARK_HOME/examples/jars/spark-examples_2.11-2.3.0.jar 10
+```
+### Testing Spark-Shell (Scala)
+```
+val msg = "Hello World..."
+#println(msg)
+
+case class Mensagem(codigo: Int, msg: String) { override def toString() :String = { return "Codigo : " + codigo + "|" + "msg : " + msg }}
+val helloWorld = Mensagem(1, msg)
+helloWorld.toString()
 ```
